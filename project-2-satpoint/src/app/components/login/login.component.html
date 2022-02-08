@@ -27,7 +27,8 @@
 
 
         <p>A platform where fellow users can view, monitor, and share their satellite experiences</p>
-        <button class="m-2 p-1" id="login" (click)="display($event)">login</button>
-        <button class="m-2 p-1" id="register" (click)="display($event)">register</button>
+        <button class="m-2 p-1" id="login" (click)="display($event)" type="submit">login</button>
+        <button class="m-2 p-1" id="register" (click)="display($event)" type="submit">register</button>
+        <button *ngIf="displaySub" class="m-2 p-1" id="submit" (click)="display($event)" type="submit">Submit</button>
     </div>
 </section>

@@ -10,6 +10,7 @@ export class LoginComponent implements OnInit {
 
   displayReg = false;
   displayLog = false;
+  displaySub = false;
 
   constructor() { }
 
@@ -21,12 +22,15 @@ export class LoginComponent implements OnInit {
     //console.log(id);
     if(id==="register") {
       this.displayReg = true;
+      this.displaySub = true;
       this.displayLog = false;
     }
-    else if(id==="login") {
+    else if(id==="login" || id ==="submit") {
       this.displayLog = true;
       this.displayReg = false;
+      this.displaySub = false;
     }
+   
 
   }
 
