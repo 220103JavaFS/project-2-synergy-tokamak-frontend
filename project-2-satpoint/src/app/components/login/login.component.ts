@@ -88,8 +88,9 @@ export class LoginComponent implements OnInit {
       this.badPassword = false;
       console.log("good pw")
     }
+    satpoint.classList.remove("is-invalid");
   }
-  satpoint.classList.remove("is-invalid");
+
   }
 }
 
