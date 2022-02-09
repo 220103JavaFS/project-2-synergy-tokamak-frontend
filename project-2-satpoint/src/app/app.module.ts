@@ -11,6 +11,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { SatInfoComponent } from './components/sat-info/sat-info.component';
+import { SatListComponent } from './components/sat-list/sat-list.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { SatInfoComponent } from './components/sat-info/sat-info.component';
     RegisterComponent,
     HomePageComponent,
     ProfileComponent,
-    SatInfoComponent
+    SatInfoComponent,
+    SatListComponent
   ],
   imports: [
     BrowserModule,
