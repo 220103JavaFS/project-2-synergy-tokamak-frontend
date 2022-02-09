@@ -11,6 +11,7 @@ import { HomePageComponent } from './components/home-page/home-page.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { SatInfoComponent } from './components/sat-info/sat-info.component';
 import { SatListComponent } from './components/sat-list/sat-list.component';
+import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { SatListComponent } from './components/sat-list/sat-list.component';
     HomePageComponent,
     ProfileComponent,
     SatInfoComponent,
-    SatListComponent
+    SatListComponent,
+    NavBarComponent
   ],
   imports: [
     BrowserModule,
