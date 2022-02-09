@@ -7,7 +7,6 @@ import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
-import { RegisterComponent } from './components/register/register.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { SatInfoComponent } from './components/sat-info/sat-info.component';
@@ -17,7 +16,6 @@ import { SatInfoComponent } from './components/sat-info/sat-info.component';
   declarations: [
     AppComponent,
     LoginComponent,
-    RegisterComponent,
     HomePageComponent,
     ProfileComponent,
     SatInfoComponent
