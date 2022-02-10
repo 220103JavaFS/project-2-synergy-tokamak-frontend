@@ -12,6 +12,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { SatInfoComponent } from './components/sat-info/sat-info.component';
 import { SatListComponent } from './components/sat-list/sat-list.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
     ProfileComponent,
     SatInfoComponent,
     SatListComponent,
-    NavBarComponent
+    NavBarComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
