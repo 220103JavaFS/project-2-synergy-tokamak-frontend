@@ -7,6 +7,8 @@
 
     <div class="text p-1">
         <h2 id="satpoint">SatPoint</h2>
+        <p>A platform where fellow users can view, monitor, and share their satellite experiences</p>
+
         <!-- <h3>sat</h3> -->
         <div class="invalid-feedback" *ngIf="badLogin" id="failedLogin">Bad Username or Password Please try again</div>
         <!--login form-->
@@ -19,29 +21,12 @@
 
         </form>
 
-        <!--register form-->
-        <form name="registerForm" id="registerForm" *ngIf="displayReg" novalidate>
-            <input class="m-1" type="text" name="firstname" id="firstname" placeholder="firstname" required>
-            <div class="invalid-feedback" id="invalidPassword">Please provide a firstname</div>
-
-            <input class="m-1" type="text" name="lastname" id="lastname" placeholder="lastname">
-            <input class="m-1" type="text" name="usernameReg" id="usernameReg" placeholder="username" required>
-            <div class="invalid-feedback" id="invalidPassword">Please provide a username</div>
-
-            <input class="m-1" type="text" name="passwordReg" id="passwordReg" placeholder="password" required>
-            <div class="invalid-feedback" id="invalidPassword">Please provide a password</div>
-
-            <input class="m-1" type="text" name="email" id="email" placeholder="email" required>
-            <div class="invalid-feedback" id="invalidPassword">Please provide a email</div>
-
-        </form>
+        <app-register *ngIf="displayReg" (displayEvent)="display($event)"></app-register>
 
 
-
-        <p>A platform where fellow users can view, monitor, and share their satellite experiences</p>
         <button *ngIf="displayLogBtn" class="m-2 p-1" id="login" (click)="display($event)" type="submit">Login</button>
         <button *ngIf="displayRegBtn" class="m-2 p-1" id="register" (click)="display($event)" type="submit">Register</button>
-        <button *ngIf="displaySub" class="m-2 p-1" id="submit" (click)="display($event)" type="submit">Submit</button>
-        <button *ngIf="displayCan" class="m-2 p-1" id="cancel" (click)="display($event)" type="submit">Cancel</button>
+        <!-- <button *ngIf="displaySub" class="m-2 p-1" id="submit" (click)="display($event)" type="submit">Submit</button>
+        <button *ngIf="displayCan" class="m-2 p-1" id="cancel" (click)="display($event)" type="submit">Cancel</button> -->
     </div>
 </section>

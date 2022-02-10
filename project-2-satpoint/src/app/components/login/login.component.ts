@@ -51,7 +51,7 @@ export class LoginComponent implements OnInit {
         const password = <HTMLInputElement>document.getElementById("password");
         this.isValidCred(username, password)
       }else if(id==="submit") {
-
+          console.log("from logon ts file");
       }
       
     }
