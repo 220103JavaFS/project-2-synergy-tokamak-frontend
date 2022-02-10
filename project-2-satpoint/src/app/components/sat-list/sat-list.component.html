@@ -1,1 +1,15 @@
-<p>sat-list works!</p>
+<div *ngFor="let sat of satList">
+  <app-sat-info
+    [satname]="sat.info.satname"
+    [satid]="sat.info.satid"
+    [latitude]="sat.positions[0].satlatitude"
+    [longitude]="sat.positions[0].satlongitude"
+    [altitude]="sat.positions[0].sataltitude"
+    [azimuth]="sat.positions[0].azimuth"
+    [elevation]="sat.positions[0].elevation"
+    [rightAccention]="sat.positions[0].ra"
+    [declination]="sat.positions[0].dec"
+    [timestamp]="sat.positions[0].timestamp"
+    
+  ></app-sat-info>
+</div>

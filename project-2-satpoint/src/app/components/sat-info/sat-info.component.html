@@ -1,4 +1,3 @@
-<p>sat-info works!</p>
 <div class="container-fluid">
   <div class="card border-primary border-2 mb-3" style="max-width: 960px">
     <div class="row g-0">
@@ -13,23 +12,23 @@
         <div class="card-body">
           <div class="row justify-content-between">
             <div class="col">
-              <h5 class="card-title text-start">SPACE STATION</h5>
+              <h5 class="card-title text-start">{{satname}}</h5>
             </div>
             <div class="col">
-              <h5 class="card-title text-end">25544</h5>
+              <h5 class="card-title text-end">{{satid}}</h5>
             </div>
           </div>
 
-          <p class="card-text m-0">LAT: -23.35</p>
-          <p class="card-text m-0">LNG: -105.19</p>
-          <p class="card-text m-0">ALT: 424.91</p>
-          <p class="card-text m-0">Azimuth: 192.61</p>
-          <p class="card-text m-0">Elevation: -31</p>
-          <p class="card-text m-0">Right Accention: 56.89</p>
-          <p class="card-text m-0">Declination: -75.48</p>
+          <p class="card-text m-0">Lat: {{latitude}}</p>
+          <p class="card-text m-0">Lng: {{longitude}}</p>
+          <p class="card-text m-0">Alt: {{altitude + "KM"}}</p>
+          <p class="card-text m-0 mt-2">Azimuth: {{azimuth}}</p>
+          <p class="card-text m-0">Elevation: {{elevation}}</p>
+          <p class="card-text m-0 mt-2">Right Accention: {{rightAccention}}</p>
+          <p class="card-text m-0">Declination: {{declination}}</p>
 
           <p class="card-text text-end">
-            <small class="text-muted">(Timestamp)</small>
+            <small class="text-muted">{{getTimestampMillis() | date:'medium'}}</small>
           </p>
           <button class="btn btn-primary">Comments</button>
         </div>
