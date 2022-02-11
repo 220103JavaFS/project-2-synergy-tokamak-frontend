@@ -50,8 +50,6 @@ export class LoginComponent implements OnInit {
         const username = <HTMLInputElement>document.getElementById("username");
         const password = <HTMLInputElement>document.getElementById("password");
         this.isValidCred(username, password)
-      }else if(id==="submit") {
-          console.log("from logon ts file");
       }
       
     }
@@ -96,12 +94,13 @@ export class LoginComponent implements OnInit {
 
   private login(username:string, password:string){
     let satpoint = <HTMLHeadingElement>document.getElementById("satpoint");
-    // this.loginService.login(username, password).subscribe(out => 
-    //   {
-    //     if(out){
-    //       this.loginService.user = out;          
-    //     }
-    // });
+    this.loginService.login(username, password).subscribe(out => 
+      {
+        if(out){
+          console.log(out);
+          this.loginService.user = out;          
+        }
+    });
     if(this.loginService.user){
       satpoint.classList.remove("is-invalid"); //temp
       this.badLogin = false;

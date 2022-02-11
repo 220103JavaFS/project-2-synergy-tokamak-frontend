@@ -10,7 +10,7 @@ import { catchError, Observable, of} from 'rxjs';
 export class LoginService {
 
   user: User | undefined;
-  private url:string="";
+  private url:string="http://localhost:8080/logon";
 
   constructor(private http:HttpClient) { }
 
@@ -20,10 +20,13 @@ export class LoginService {
         "username":username,
         "password":password
       }; 
-     
-      return this.http.post<any>(this.url, body, {
-        // withCredentials:true,
-      }).pipe(
+      console.log(body);
+      // return this.http.post<any>(this.url, body, {
+      //   // withCredentials:true,
+      // }).pipe(
+      //   catchError(this.handleError<any>('login', undefined))
+      // );
+      return this.http.get<any>(this.url).pipe(
         catchError(this.handleError<any>('login', undefined))
       );
   }
