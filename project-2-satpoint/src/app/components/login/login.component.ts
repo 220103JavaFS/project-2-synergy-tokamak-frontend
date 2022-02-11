@@ -100,15 +100,16 @@ export class LoginComponent implements OnInit {
           console.log(out);
           this.loginService.user = out;          
         }
+        if(this.loginService.user){
+          satpoint.classList.remove("is-invalid"); //temp
+          this.badLogin = false;
+          console.log("good user");
+        }else {
+          satpoint.classList.add("is-invalid");
+          this.badLogin = true;
+          console.log("bad user")
+        }
     });
-    if(this.loginService.user){
-      satpoint.classList.remove("is-invalid"); //temp
-      this.badLogin = false;
-      console.log("good user");
-    }else {
-      satpoint.classList.add("is-invalid");
-      this.badLogin = true;
-      console.log("bad user")
-    }
+    
   }
 }
