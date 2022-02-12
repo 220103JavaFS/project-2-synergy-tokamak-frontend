@@ -108,6 +108,7 @@ export class LoginComponent implements OnInit {
           satpoint.classList.add("is-invalid");
           this.badLogin = true;
           console.log("bad user")
+          console.log(out)
         }
     });
     

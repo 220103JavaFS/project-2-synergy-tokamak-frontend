@@ -26,9 +26,18 @@ export class LoginService {
       }).pipe(
         catchError(this.handleError<any>('login', undefined))
       );
-      // return this.http.get<any>(this.url).pipe(
+//       const headers = new HttpHeaders(body ? {
+//         authorization : 'Basic ' + btoa(body.username + ':' + body.password)
+//     } : {});
+// return this.http.post<any>(this.url, body, {headers:headers}).pipe(
+//         catchError(this.handleError<any>('login', undefined))
+//       );
+
+
+
+      // return this.http.get<any>(this.url, {headers:headers}).pipe(
       //   catchError(this.handleError<any>('login', undefined))
-      // );
+      // ); 
   }
 
   private handleError<T>(operation = 'operation', result?: T) {
