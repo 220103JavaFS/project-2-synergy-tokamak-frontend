@@ -15,7 +15,7 @@
             <div class="col">
               <h5 class="card-title text-start">{{ satname }}</h5>
             </div>
-            <div class="col">
+            <div class="col-3">
               <h5 class="card-title text-end">{{ satId }}</h5>
             </div>
           </div>
@@ -29,6 +29,10 @@
             Right Accention: {{ rightAccention }}
           </p>
           <p class="card-text m-0">Declination: {{ declination }}</p>
+
+          <p class="cart-text m-0">Favorites: {{favorites}}</p>
+          
+          <button class="btn btn-secondary">Fav</button>
 
           <p class="card-text text-end">
             <small class="text-muted">{{
