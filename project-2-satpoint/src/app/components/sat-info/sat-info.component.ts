@@ -1,4 +1,5 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { SatService } from 'src/app/services/sat.service';
 import { SidePanelService } from 'src/app/services/side-panel.service';
 
 @Component({
@@ -8,8 +9,10 @@ import { SidePanelService } from 'src/app/services/side-panel.service';
 })
 export class SatInfoComponent implements OnInit {
   @Input() satname: string = '';
-  @Input() satid: string = '';
-  
+  @Input() satId: string = '';
+  @Input() url: string = '';
+  @Input() favorites: string = '';
+
   @Input() latitude: string = '';
   @Input() longitude: string = '';
   @Input() altitude: string = '';
@@ -19,12 +22,15 @@ export class SatInfoComponent implements OnInit {
 
   @Input() rightAccention: string = '';
   @Input() declination: string = '';
-  
+
   @Input() timestamp: string = '';
 
   @Output() togglePanelStateEvent = new EventEmitter<any>();
 
-  constructor(private panelService:SidePanelService) {}
+  constructor(
+    private panelService: SidePanelService,
+    private satService: SatService
+  ) {}
 
   ngOnInit(): void {}
 
@@ -32,18 +38,31 @@ export class SatInfoComponent implements OnInit {
     return Number(this.timestamp) * 1000;
   }
 
+  refreshData(): void {
+    this.satService.getSatLocData(this.satId).subscribe({
+      next: (data: any) => {
+        let positions: any = data.positions[0];
+        this.latitude = positions.satlatitude;
+        this.longitude = positions.satlongitude;
+        this.altitude = positions.sataltitude;
+        this.azimuth = positions.azimuth;
+        this.elevation = positions.elevation;
+        this.rightAccention = positions.ra;
+        this.declination = positions.dec;
+        this.timestamp = positions.timestamp;
+      },
+    });
+  }
+
   toggleSidePanelEvent() {
-    
     //this.panelService.togglePanelState();
     this.panelService.setShowPanel(true);
-    console.log("1")
+    console.log('1');
 
-      this.togglePanelStateEvent.emit(
-        {
-          "showPanel":this.panelService.getShowPanel(),
-          "name":this.satname,
-          "id":this.satid
-        }
-      )
+    this.togglePanelStateEvent.emit({
+      showPanel: this.panelService.getShowPanel(),
+      name: this.satname,
+      id: this.satId,
+    });
   }
 }
