@@ -34,4 +34,8 @@
   .side-nav-bar-collapsed {
     visibility: collapse !important;
   }
+
+  #panel {
+    overflow-y: auto;
+  }
   

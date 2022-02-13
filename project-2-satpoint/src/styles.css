@@ -13,3 +13,11 @@ body {
     width: 100%;
     height: 100%;
 }
+
+.customeColorSubmit{
+    background-color: #3EA6D2;
+}
+
+.customeColorCancel{
+    background-color: #B5988D;
+}
