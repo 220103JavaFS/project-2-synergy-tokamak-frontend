@@ -12,10 +12,13 @@
 </div>
 
 <ng-template #navContent>
-    <p>{{satname}}</p>
-    <p>{{satid}}</p>
-    <textarea name="" id="" cols="30" rows="10"></textarea>
+    <div class="text-start m-2 fs-4">
+      <span class="me-5">{{satname}}</span>
+      <span class="ms-5">{{satid}}</span>
+    </div>
+    <textarea name="satComment" id="satComment" cols="30" rows="10" placeholder="Share your thoughts about this satellite"></textarea>
+    <div class="d-grid gap-3 d-md-flex justify-content-md-end mt-2">
+      <button class="btn btn-success" type="submit">Submit</button>
+      <button class="btn btn-danger me-5" type="submit">Cancel</button>
+    </div>
 </ng-template>
-
-
- <!-- -->
