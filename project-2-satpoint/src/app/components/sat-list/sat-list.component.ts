@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Output, OnInit, Input, EventEmitter } from '@angular/core';
 import { SatService } from 'src/app/services/sat.service';
+import { SidePanelService } from 'src/app/services/side-panel.service';
 
 @Component({
   selector: 'app-sat-list',
@@ -7,6 +8,8 @@ import { SatService } from 'src/app/services/sat.service';
   styleUrls: ['./sat-list.component.css'],
 })
 export class SatListComponent implements OnInit {
+  @Output() showPanelMethodEvent = new EventEmitter<string>();
+
   public satList: any[] = [
     {
       info: {
@@ -70,9 +73,15 @@ export class SatListComponent implements OnInit {
     },
   ];
 
-  constructor(private satService: SatService) {}
+  constructor(private satService: SatService, private panelService:SidePanelService) {}
 
   ngOnInit(): void {}
 
   getSatList(): void {}
+
+  togglePanelStateEvent(info:string) {
+    console.log("2")
+
+    this.showPanelMethodEvent.emit(info);
+  }
 }

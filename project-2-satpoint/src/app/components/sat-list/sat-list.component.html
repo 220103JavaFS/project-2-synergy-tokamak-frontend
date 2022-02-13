@@ -1,5 +1,5 @@
 <div *ngFor="let sat of satList">
-  <app-sat-info
+  <app-sat-info (togglePanelStateEvent)="togglePanelStateEvent($event)"
     [satname]="sat.info.satname"
     [satid]="sat.info.satid"
     [latitude]="sat.positions[0].satlatitude"

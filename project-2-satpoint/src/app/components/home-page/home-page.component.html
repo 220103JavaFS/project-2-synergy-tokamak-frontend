@@ -1,3 +1,21 @@
+<app-comments
+  [showSidePanel] = "showPanel" 
+  [sidenavTemplateRef]="navContent"
+  [direction]="right" 
+  [navWidth]="400" 
+  [duration]="0.5"
+  (closeEvent)="closeEvent($event)"></app-comments>
 
+<div class="main-container">
 <app-nav-bar></app-nav-bar>
-<app-sat-list></app-sat-list>
+<app-sat-list (showPanelMethodEvent)="showPanelMethod($event)"></app-sat-list>
+</div>
+
+<ng-template #navContent>
+    <p>{{satname}}</p>
+    <p>{{satid}}</p>
+    <textarea name="" id="" cols="30" rows="10"></textarea>
+</ng-template>
+
+
+ <!-- -->

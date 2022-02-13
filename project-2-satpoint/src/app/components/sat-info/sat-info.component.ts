@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { SidePanelService } from 'src/app/services/side-panel.service';
 
 @Component({
   selector: 'app-sat-info',
@@ -21,11 +22,28 @@ export class SatInfoComponent implements OnInit {
   
   @Input() timestamp: string = '';
 
-  constructor() {}
+  @Output() togglePanelStateEvent = new EventEmitter<any>();
+
+  constructor(private panelService:SidePanelService) {}
 
   ngOnInit(): void {}
 
   getTimestampMillis(): number {
     return Number(this.timestamp) * 1000;
+  }
+
+  toggleSidePanelEvent() {
+    
+    //this.panelService.togglePanelState();
+    this.panelService.setShowPanel(true);
+    console.log("1")
+
+      this.togglePanelStateEvent.emit(
+        {
+          "showPanel":this.panelService.getShowPanel(),
+          "name":this.satname,
+          "id":this.satid
+        }
+      )
   }
 }
