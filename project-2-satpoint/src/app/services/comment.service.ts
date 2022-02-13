@@ -1,17 +1,18 @@
 import { Injectable } from '@angular/core';
+import { Comment } from '../models/comment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CommentService {
-  private comments = [
+  private comments:Comment[] = [
     {
       description:"My first satellite!",
       user: {
         userId:1,
         username:"bob's burgers",
-        firstname:"bob",
-        lastname:"burgers",
+        firstName:"bob",
+        lastName:"burgers",
         email:"burgers@email.com"
       },
       sat: {
@@ -27,8 +28,8 @@ export class CommentService {
       user: {
         userId:1,
         username:"bob's burgers",
-        firstname:"bob",
-        lastname:"burgers",
+        firstName:"bob",
+        lastName:"burgers",
         email:"burgers@email.com"
       },
       sat: {
@@ -44,8 +45,8 @@ export class CommentService {
       user: {
         userId:1,
         username:"bob's burgers",
-        firstname:"bob",
-        lastname:"burgers",
+        firstName:"bob",
+        lastName:"burgers",
         email:"burgers@email.com"
       },
       sat: {
@@ -61,6 +62,10 @@ export class CommentService {
   constructor() { }
 
   getComments(satid:string):any[] {
-    return this.comments.filter(comment => comment.sat.id == satid);
+    return this.comments.reverse().filter(comment => comment.sat.id == satid);
+  }
+
+  sendComment(comment:Comment){
+      this.comments.push(comment);
   }
 }

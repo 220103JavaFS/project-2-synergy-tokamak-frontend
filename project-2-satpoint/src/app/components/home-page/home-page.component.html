@@ -18,8 +18,8 @@
     </div>
     <textarea name="satComment" id="satComment" cols="30" rows="10" placeholder="Share your thoughts about this satellite"></textarea>
     <div class="d-grid gap-3 d-md-flex justify-content-md-end mt-2">
-      <button class="p-1 customeColorSubmit" type="submit">Submit</button>
-      <button class="p-1 me-5 customeColorCancel" type="submit">Cancel</button>
+      <button class="p-1 customeColorSubmit" type="submit" (click)="submit()" id="submitBtn">Submit</button>
+      <button class="p-1 me-5 customeColorCancel" type="submit" (click)="cancel()">Cancel</button>
     </div>
     <div class="m-2" *ngFor="let comment of getComments()">
       <div class="m-3 p-5 bg-primary bg-opacity-25">
