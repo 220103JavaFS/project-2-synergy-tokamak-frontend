@@ -6,7 +6,7 @@
   [duration]="0.5"
   (closeEvent)="closeEvent($event)"></app-comments>
 
-<div class="main-container">
+<div class="main-container position-absolute top-50 start-50 translate-middle">
 <app-nav-bar></app-nav-bar>
 <app-sat-list (showPanelMethodEvent)="showPanelMethod($event)"></app-sat-list>
 </div>
@@ -16,9 +16,9 @@
       <span class="me-5">{{satname}}</span>
       <span class="ms-5">{{satid}}</span>
     </div>
-    <textarea name="satComment" id="satComment" cols="30" rows="10" placeholder="Share your thoughts about this satellite"></textarea>
+    <textarea name="satComment" id="satComment" cols="30" rows="10" [(ngModel)]="message" placeholder="Share your thoughts about this satellite"></textarea>
     <div class="d-grid gap-3 d-md-flex justify-content-md-end mt-2">
-      <button class="p-1 customeColorSubmit" type="submit" (click)="submit()" id="submitBtn">Submit</button>
+      <button class="p-1 customeColorSubmit" type="submit" (click)="submit()">Submit</button>
       <button class="p-1 me-5 customeColorCancel" type="submit" (click)="cancel()">Cancel</button>
     </div>
     <div class="m-2" *ngFor="let comment of getComments()">

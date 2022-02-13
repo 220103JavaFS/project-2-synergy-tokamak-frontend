@@ -21,7 +21,7 @@ export class HomePageComponent implements OnInit {
   tempSatid = "";
   right = SideNavDirection.Right;
   comments!:any;
-  message:string="";
+  message='';
 
   constructor(private loginService:LoginService, private panelService: SidePanelService, private commentService:CommentService) { }
 
@@ -34,7 +34,7 @@ export class HomePageComponent implements OnInit {
     this.satid = info.id;
     this.showPanel = info.showPanel;
     if(this.tempSatid != this.satid) {
-      this.clear(this.getTextArea());
+      this.clear();
     }
     this.tempSatid = this.satid;
     
@@ -50,28 +50,23 @@ export class HomePageComponent implements OnInit {
   }
 
   submit(){
-    let satComment = this.getTextArea();
-    if(satComment.value){
+    if(this.message){
     this.commentService.sendComment(
-      new Comment(satComment.value, 
+     
+      new Comment(this.message, 
       new User(1, "tester", "tester", "tester", "tester"), 
       new Sat(this.satid, this.satname,"",0), new Date(Date.now()).toLocaleString()));
     }
-    this.clear(satComment);
+    this.clear();
   }
 
   cancel(){
-    this.clear(this.getTextArea());
+    this.clear();
     this.closeEvent(false);
   }
 
-  clear(satComment:HTMLTextAreaElement){
-    satComment.value="";
+  clear(){
     this.message="";
-  }
-
-  getTextArea(){
-    return <HTMLTextAreaElement> document.getElementById("satComment");
   }
 
 }
