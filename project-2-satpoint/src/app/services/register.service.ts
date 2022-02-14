@@ -9,22 +9,15 @@ import { catchError, Observable, of} from 'rxjs';
 export class RegisterService {
 
 
-  private url:string ="http://localhost:8080/user";
+  private url:string ="http://localhost:8080";
 
   constructor(private http:HttpClient) { }
 
-  register(id:number, username:string, password:string, firstname:string, lastname:string, email:string):Observable<any>{
-    let body ={
-      "username":username,
-      "password":password,
-      "firstname":firstname,
-      "lastname":lastname,
-      "email":email
-
-    };
-    console.log(body);
-    return this.http.post<any>(this.url, body, {})
+  register(thisuser:User):Observable<User>{
+    return this.http.post(this.url + "users", thisuser) as Observable<User>;
   }
+
+
 
   
 }
