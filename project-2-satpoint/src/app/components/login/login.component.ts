@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { ControlContainer } from '@angular/forms';
+import { Router, RouterLink } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
-import { RegisterService } from 'src/app/services/register.service';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
@@ -23,7 +22,7 @@ export class LoginComponent implements OnInit {
   badLogin = false;
   
 
-  constructor(private loginService:LoginService, private registerService:RegisterService) { }
+  constructor(private loginService:LoginService, private router:Router) { }
 
   ngOnInit(): void {
   }
@@ -94,23 +93,35 @@ export class LoginComponent implements OnInit {
 
   private login(username:string, password:string){
     let satpoint = <HTMLHeadingElement>document.getElementById("satpoint");
-    this.loginService.login(username, password).subscribe(out => 
-      {
-        if(out){
-          console.log(out);
-          this.loginService.user = out;          
-        }
-        if(this.loginService.user){
-          satpoint.classList.remove("is-invalid"); //temp
-          this.badLogin = false;
-          console.log("good user");
-        }else {
-          satpoint.classList.add("is-invalid");
-          this.badLogin = true;
-          console.log("bad user")
-          console.log(out)
-        }
-    });
-    
+  //   this.loginService.login(username, password).subscribe(out => 
+  //     {
+  //       if(out){
+  //         console.log(out);
+  //         this.loginService.user = out;          
+  //       }
+  //       if(this.loginService.user){
+  //         satpoint.classList.remove("is-invalid"); //temp
+  //         this.badLogin = false;
+          
+  //       }else {
+  //         satpoint.classList.add("is-invalid");
+  //         this.badLogin = true;
+          
+  //       }
+  //   });
+  
+  this.loginService.login(username, password);
+  console.log(this.loginService.getCurrentUser());
+  if(this.loginService.getCurrentUser()) {
+    this.router.navigateByUrl("/homepage");
   }
+  else {
+    satpoint.classList.add("is-invalid");
+    this.badLogin = true;
+    }
+  
+  
+  }
+
+
 }
