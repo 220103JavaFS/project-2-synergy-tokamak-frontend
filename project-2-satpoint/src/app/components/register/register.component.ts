@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { RegisterService } from 'src/app/services/register.service';
 import { Register } from 'src/app/models/register';
+import { User } from 'src/app/models/user';
 
 @Component({
   selector: 'app-register',
@@ -25,32 +26,32 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  registerUser(): void{
-    let user:Register = new Register(0, this.username, this.password, this.firstName, this.lastName, this.email);
-    console.log(user);
-    this.userService.register(user).subscribe(
-      (response:Register)=>{
-          
-        }
-      )
-  }
-
-  
-  
-  // registerUser(): void{
-  //   if (this.username == "" || this.password == "" || this.firstName == "" || this.lastName == "" || this.email == "" ){
-  //     alert ("Please fill out all of the fields");
-  //   }
-  //   else {
-  //     let user:Register = new Register(0, this.username, this.password, this.firstName, this.lastName, this.email);
-  //     console.log(user);
-  //     this.userService.register(user).subscribe(
-  //       (response:Register)=>{
+  // registerUser(){
+  //   let user:Register = new Register(0, this.username, this.password, this.firstName, this.lastName, this.email);
+  //   console.log(user);
+  //   this.userService.register(user).subscribe(
+  //     (response:Register)=>{
           
   //       }
   //     )
-  //   }
   // }
+
+
+  
+  registerUser(): void{
+    if (this.username == "" || this.password == "" || this.firstName == "" || this.lastName == "" || this.email == "" ){
+      alert ("Please fill out all of the fields");
+    }
+    else {
+      let user:Register = new Register(0, this.username, this.password, this.firstName, this.lastName, this.email);
+      console.log(user);
+      this.userService.register(user).subscribe(
+        (response:Register)=>{
+          
+        }
+      )
+    }
+  }
 
 
   display(event:MouseEvent):void{

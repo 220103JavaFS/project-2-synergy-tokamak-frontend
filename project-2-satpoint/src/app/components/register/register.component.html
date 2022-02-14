@@ -1,17 +1,34 @@
-<form name="registerForm" id="registerForm"  novalidate>
-    <input class="m-1" type="text" name="firstName" id="firstName" placeholder="firstName" required>
-    <div class="invalid-feedback" id="invalidPassword">Please provide a firstname</div>
 
-    <input class="m-1" type="text" name="lastName" id="lastName" placeholder="lastName">
-    <input class="m-1" type="text" name="username" id="username" placeholder="username" required>
-    <div class="invalid-feedback" id="invalidPassword">Please provide a username</div>
 
-    <input class="m-1" type="text" name="password" id="password" placeholder="password" required>
-    <div class="invalid-feedback" id="invalidPassword">Please provide a password</div>
 
-    <input class="m-1" type="text" name="email" id="email" placeholder="email" required>
-    <div class="invalid-feedback" id="invalidPassword">Please provide a email</div>
-</form>
 
-<button class="m-2 p-1" id="cancel" (click)="registerUser()" class="btn btn-secondary">submit</button>
-<button class="m-2 p-1" id="cancel" (click)="display($event)" type="submit">Cancel</button>
+<form>
+    <h3>Register</h3>
+    <div>
+        <label class="label col-sm-3">firstname:</label>
+        <input type="text" name="firstName" [(ngModel)] = "firstName" class="form-control" placeholder="firstname" required>
+
+        <label class="label col-sm-3">lastname:</label>
+        <input type="text" name="lastname" [(ngModel)] = "lastName" class="form-control" placeholder="lastName" required>
+
+        <label class="label col-sm-3">password:</label>
+        <input type="text" name="password" [(ngModel)] = "password" class="form-control" placeholder="password" required>
+
+        <label class="label col-sm-3">username:</label>
+        <input type="text" name="username" [(ngModel)] = "username" class="form-control" placeholder="username" required>
+
+        <label class="label col-sm-3">email:</label>
+        <input type="text" name="email" [(ngModel)] = "email" class="form-control" placeholder="email" required>
+
+
+
+
+        <button (click)="registerUser()" class="btn btn-secondary">Register</button>
+        <button class="m-2 p-1" id="cancel" (click)="display($event)" type="submit">Cancel</button>
+
+
+    </div>
+</form>    
+    
+
+ 
