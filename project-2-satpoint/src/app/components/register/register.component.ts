@@ -9,11 +9,11 @@ import { User } from 'src/app/models/user';
 })
 export class RegisterComponent implements OnInit {
 
-  username:string = "";
-  password:string = "";
-  firstName:string = "";
-  lastName:string = "";
-  email:string = "";
+  // username:string = "";
+  // password:string = "";
+  // firstName:string = "";
+  // lastName:string = "";
+  // email:string = "";
 
   @Output() displayEvent = new EventEmitter<MouseEvent>(); //triggers the parent
 
@@ -25,20 +25,20 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  registerUser(): void{
-    if (this.username == "" || this.password == "" || this.firstName == "" || this.lastName == "" || this.email == "" ){
-      alert ("Please fill out all of the fields");
-    }
-    else {
-      let user:User = new User(0, this.username, this.password, this.firstName, this.lastName, this.email);
-      console.log(user);
-      this.userService.register(user).subscribe(
-        (response:User)=>{
+  // registerUser(): void{
+  //   if (this.username == "" || this.password == "" || this.firstName == "" || this.lastName == "" || this.email == "" ){
+  //     alert ("Please fill out all of the fields");
+  //   }
+  //   else {
+  //     let user:User = new User(0, this.username, this.password, this.firstName, this.lastName, this.email);
+  //     console.log(user);
+  //     this.userService.register(user).subscribe(
+  //       (response:User)=>{
           
-        }
-      )
-    }
-  }
+  //       }
+  //     )
+  //   }
+  // }
 
 
   display(event:MouseEvent):void{
