@@ -55,7 +55,7 @@ export class HomePageComponent implements OnInit {
     this.commentService.sendComment(
      
       new Comment(this.message, 
-      new User(1, "tester", "tester", "tester", "tester"), 
+      new User(1, "tester", "tester", "tester", "tester", ""), 
       new Sat(this.satid, this.satname,"",0), new Date(Date.now()).toLocaleString()));
     }
     this.clear();

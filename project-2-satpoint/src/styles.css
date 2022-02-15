@@ -1,5 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 @import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
+* {
+    font-family:"Space Mono", sans-serif;
+}
 body {
     background-color: rgb(2, 6, 44);
     padding: 0;

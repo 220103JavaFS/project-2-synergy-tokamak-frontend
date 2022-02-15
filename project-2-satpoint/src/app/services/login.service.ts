@@ -18,7 +18,8 @@ export class LoginService {
       username:"tester",
       firstName:"merry",
       lastName:"tester",
-      email:"mtester@email.com"
+      email:"mtester@email.com",
+      aboutMe:"satellites are cool"
     },
   ]
 
@@ -58,7 +59,8 @@ export class LoginService {
 }
 
   getCurrentUser():User | undefined {
-    return this.currentUser;
+    //return this.currentUser;
+    return this.users[0];
   }
 
 }

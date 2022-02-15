@@ -13,7 +13,8 @@ export class CommentService {
         username:"bob's burgers",
         firstName:"bob",
         lastName:"burgers",
-        email:"burgers@email.com"
+        email:"burgers@email.com",
+        aboutMe:""
       },
       sat: {
         id:"36516",
@@ -30,7 +31,8 @@ export class CommentService {
         username:"bob's burgers",
         firstName:"bob",
         lastName:"burgers",
-        email:"burgers@email.com"
+        email:"burgers@email.com",
+        aboutMe:""
       },
       sat: {
         id:"36516",
@@ -47,7 +49,8 @@ export class CommentService {
         username:"bob's burgers",
         firstName:"bob",
         lastName:"burgers",
-        email:"burgers@email.com"
+        email:"burgers@email.com",
+        aboutMe:""
       },
       sat: {
         id:"25544",
