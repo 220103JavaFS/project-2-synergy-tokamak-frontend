@@ -9,6 +9,7 @@ import { SidePanelService } from 'src/app/services/side-panel.service';
 })
 export class SatListComponent implements OnInit {
   @Output() showPanelMethodEvent = new EventEmitter<string>();
+  @Input() term = ""
 
   public satList: any[] = [
     {
@@ -40,6 +41,19 @@ export class SatListComponent implements OnInit {
 
   getSatList(): void {
     //make api call to our DB and set satList to the list of sat objects we get back
+  }
+
+  filterSatList(){
+    console.log("satlisting");
+    console.log(this.term)
+    if(this.term) {
+    return this.satList.filter(sat => {
+      if(sat.satName.toLowerCase().includes(this.term) || sat.satId.toString().includes(this.term)){
+        return sat;
+      }
+    })
+  }
+    return this.satList;
   }
 
   togglePanelStateEvent(info: string) {

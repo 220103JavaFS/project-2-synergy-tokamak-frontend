@@ -22,6 +22,7 @@ export class HomePageComponent implements OnInit {
   right = SideNavDirection.Right;
   comments!:any;
   message='';
+  term="";
 
   constructor(private loginService:LoginService, private panelService: SidePanelService, private commentService:CommentService) { }
 

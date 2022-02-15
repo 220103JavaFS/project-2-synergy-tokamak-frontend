@@ -6,9 +6,17 @@
   [duration]="0.5"
   (closeEvent)="closeEvent($event)"></app-comments>
 
-<div class="main-container position-absolute top-50 start-50 translate-middle">
-<app-nav-bar></app-nav-bar>
-<app-sat-list (showPanelMethodEvent)="showPanelMethod($event)"></app-sat-list>
+
+<div class="main-container">
+  <app-nav-bar></app-nav-bar>
+<div class="row">
+  <div class="form-group col-2 m-5 align-items-start">
+    <input type="text" class="form-control" placeholder="Filter Satellites" [(ngModel)]="term"> 
+  </div> 
+  <div class="col">
+    <app-sat-list [term]="term" (showPanelMethodEvent)="showPanelMethod($event)"></app-sat-list>
+  </div>
+</div>
 </div>
 
 <ng-template #navContent>
