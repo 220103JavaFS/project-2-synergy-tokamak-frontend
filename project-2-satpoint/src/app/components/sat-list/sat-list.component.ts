@@ -14,19 +14,19 @@ export class SatListComponent implements OnInit {
     {
       satName: 'INTERNATIONAL SPACE STATION',
       satId: 25544,
-      url: 'https://www.nasa.gov/sites/default/files/s132e012209_sm.jpg',
+      satPicture: 'https://www.nasa.gov/sites/default/files/s132e012209_sm.jpg',
       numFavorites: 10,
     },
     {
       satName: 'SES 1',
       satId: 36516,
-      url: '',
+      satPicture: '',
       numFavorites: 3,
     },
     {
       satName: 'NOAA 19',
       satId: 33591,
-      url: '',
+      satPicture: '',
       numFavorites: 5,
     },
   ];

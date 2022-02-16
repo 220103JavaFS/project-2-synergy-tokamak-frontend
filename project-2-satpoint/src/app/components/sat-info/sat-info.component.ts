@@ -36,6 +36,7 @@ export class SatInfoComponent implements OnInit {
 
   getTimestampMillis(): number {
     return Number(this.timestamp) * 1000;
+    
   }
 
   refreshData(): void {
