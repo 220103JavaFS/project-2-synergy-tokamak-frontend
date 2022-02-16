@@ -34,8 +34,6 @@ export class SatListComponent implements OnInit {
     if(this.page = "mainPage")
     {
       this.getSatListByFavorites();
-      console.log("setting satlist");
-      console.log(this.globalSatList);
     }
     else if(this.page = "userFavorites")
     {
@@ -48,7 +46,6 @@ export class SatListComponent implements OnInit {
   }
 
   getSatListByFavorites(){
-    //console.log("Subscribing");
     this.satService.getSatFavorites().subscribe(
       (response: Sat[]) => {
         this.globalSatList = response;
