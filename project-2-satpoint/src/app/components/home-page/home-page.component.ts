@@ -20,7 +20,7 @@ export class HomePageComponent implements OnInit {
   @Input() showPanel !:boolean;
   tempSatid = "";
   right = SideNavDirection.Right;
-  comments!:any;
+  // comments!:any;
   message='';
   term="";
 
@@ -45,10 +45,10 @@ export class HomePageComponent implements OnInit {
     
   }
 
-  getComments(){
-    this.comments = this.commentService.getComments(this.satid);
-    return this.comments;
-  }
+  // getComments(){
+  //   this.comments = this.commentService.getComments(this.satid);
+  //   return this.comments;
+  // }
 
   submit(){
     if(this.message){

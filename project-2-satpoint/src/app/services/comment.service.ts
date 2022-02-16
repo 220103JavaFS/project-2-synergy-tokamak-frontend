@@ -10,7 +10,7 @@ export class CommentService {
       description:"My first satellite!",
       user: {
         userId:1,
-        username:"bob's burgers",
+        username:"tester",
         firstName:"bob",
         lastName:"burgers",
         email:"burgers@email.com",
@@ -68,7 +68,12 @@ export class CommentService {
     return this.comments.reverse().filter(comment => comment.sat.id == satid);
   }
 
+  getUserComments(username:String):any[]{
+    return this.comments.reverse().filter(comment => comment.user.username.toLowerCase() == username.toLowerCase())
+  }
+
   sendComment(comment:Comment){
       this.comments.push(comment);
   }
+
 }

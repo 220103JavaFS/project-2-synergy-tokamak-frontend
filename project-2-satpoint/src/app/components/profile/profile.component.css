@@ -1,4 +1,7 @@
 img {
-    width: auto;
+    width:auto;
     height: auto;
+}
+textarea {
+    width: fit-content;
 }

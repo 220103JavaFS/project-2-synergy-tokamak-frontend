@@ -14,6 +14,9 @@ export class ProfileComponent implements OnInit {
   email: String | undefined;
   user : User | undefined;
   username: String | undefined;
+  showFav = false;
+  showCom = false;
+  satid = ""
 
   constructor(private loginService:LoginService) { }
 
@@ -26,5 +29,16 @@ export class ProfileComponent implements OnInit {
     this.email = this.user?.email;
     this.username = this.user?.username;
   }
+
+  showFavorites(){
+    console.log(this.showFav)
+      this.showFav = !this.showFav;
+  }
+  showComments(){
+    this.showCom = !this.showCom;
+    console.log(this.showCom)
+  }
+
+  
 
 }
