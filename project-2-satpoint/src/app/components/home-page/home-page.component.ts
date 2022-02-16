@@ -16,7 +16,8 @@ import { Comment } from 'src/app/models/comment';
 export class HomePageComponent implements OnInit {
 
   @Output() satname="";
-  @Output() satid="";
+  @Output() satid=0;
+  @Output() satNoradId="";
   @Input() showPanel !:boolean;
   tempSatid = "";
   right = SideNavDirection.Right;
@@ -34,11 +35,12 @@ export class HomePageComponent implements OnInit {
 
     this.satname = info.name;
     this.satid = info.id;
+    this.satNoradId = info.noradId;
     this.showPanel = info.showPanel;
-    if(this.tempSatid != this.satid) {
+    if(this.tempSatid != this.satNoradId) {
       this.clear();
     }
-    this.tempSatid = this.satid;
+    this.satNoradId = this.satNoradId;
     
   }
   closeEvent(event:boolean){
@@ -57,7 +59,7 @@ export class HomePageComponent implements OnInit {
      
       new Comment(this.message, 
       new User(1, "tester", "tester", "tester", "tester", ""), 
-      new Sat(this.satid, this.satname,"",0), new Date(Date.now()).toLocaleString()));
+      new Sat(this.satid, this.satNoradId, this.satname,"",0), new Date(Date.now()).toLocaleString()));
     }
     this.clear();
   }

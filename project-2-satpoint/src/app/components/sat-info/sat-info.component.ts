@@ -11,9 +11,10 @@ import { SidePanelService } from 'src/app/services/side-panel.service';
 
 export class SatInfoComponent implements OnInit {
   @Input() satname: string = '';
-  @Input() satId: string = '';
-  @Input() url: string = '';
-  @Input() favorites: number = 0;
+  @Input() satId: number = 0;
+  @Input() satNoradId: string = '';
+  @Input() satPicture: string = '';
+  @Input() numFavorites: number = 0;
 
   @Input() latitude: string = '';
   @Input() longitude: string = '';
@@ -35,7 +36,6 @@ export class SatInfoComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log(this.satId);
   }
 
   getTimestampMillis(): number {
@@ -43,7 +43,7 @@ export class SatInfoComponent implements OnInit {
   }
 
   refreshData(): void {
-    this.satService.getSatLocData(this.satId).subscribe({
+    this.satService.getSatLocData(this.satNoradId).subscribe({
       next: (data: any) => {
         let positions: any = data.positions[0];
         this.latitude = positions.satlatitude;

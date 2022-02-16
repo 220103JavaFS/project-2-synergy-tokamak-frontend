@@ -8,7 +8,8 @@ import { CommentService } from 'src/app/services/comment.service';
 })
 export class CommentCardsComponent implements OnInit {
   comments!:any;
-  @Input() satid="";
+  @Input() satid=0;
+  @Input() satNoradId="";
   @Input() username: String | undefined;
   @Input() onUserProfile = false;
 
@@ -20,7 +21,7 @@ export class CommentCardsComponent implements OnInit {
 
   
   getComments(){
-    if(this.satid) return this.commentService.getComments(this.satid);
+    if(this.satid) return this.commentService.getComments(this.satNoradId);
     if(this.username) return this.commentService.getUserComments(this.username);
     // this.comments = this.commentService.getComments(this.satid);
     return this.comments;

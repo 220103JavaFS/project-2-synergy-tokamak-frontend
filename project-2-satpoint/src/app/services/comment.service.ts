@@ -17,7 +17,8 @@ export class CommentService {
         aboutMe:""
       },
       sat: {
-        satId:"36516",
+        satId: 1,
+        satNoradId:"36516",
         satName:"SES 1",
         satPicture:"",
         numFavorites:0
@@ -35,7 +36,8 @@ export class CommentService {
         aboutMe:""
       },
       sat: {
-        satId:"36516",
+        satId: 1,
+        satNoradId:"36516",
         satName:"SES 1",
         satPicture:"",
         numFavorites:0
@@ -53,7 +55,8 @@ export class CommentService {
         aboutMe:""
       },
       sat: {
-        satId:"25544",
+        satId: 1,
+        satNoradId:"25544",
         satName:"SPACE STATION",
         satPicture:"",
         numFavorites:0
@@ -64,8 +67,8 @@ export class CommentService {
   ];
   constructor() { }
 
-  getComments(satid:string):any[] {
-    return this.comments.reverse().filter(comment => comment.sat.satId == satid);
+  getComments(noradId:string):any[] {
+    return this.comments.reverse().filter(comment => comment.sat.satNoradId == noradId);
   }
 
   getUserComments(username:String):any[]{
