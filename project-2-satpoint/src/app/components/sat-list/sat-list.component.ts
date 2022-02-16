@@ -33,6 +33,7 @@ export class SatListComponent implements OnInit {
     let id = localStorage.getItem('id');
     if(this.page = "mainPage")
     {
+      console.log("Getting global favorites");
       this.getSatListByFavorites();
     }
     else if(this.page = "userFavorites")
@@ -40,8 +41,10 @@ export class SatListComponent implements OnInit {
       if(id)
       {
         this.getSatListByUserFavorites(parseInt(id));
-      }
         this.satList = this.userSatList;
+        console.log("Getting user favorites");
+      }
+        console.log("Error getting user favorites");
     }
   }
 
@@ -50,8 +53,6 @@ export class SatListComponent implements OnInit {
       (response: Sat[]) => {
         this.globalSatList = response;
         this.satList = this.globalSatList;
-        console.log("Set global");
-        console.log(this.satList);
       }
     )
   }
