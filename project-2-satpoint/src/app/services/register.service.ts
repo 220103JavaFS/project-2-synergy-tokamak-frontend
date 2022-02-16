@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { User } from '../models/user';
+import { Register } from '../models/register';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, Observable, of} from 'rxjs';
 
@@ -9,22 +9,15 @@ import { catchError, Observable, of} from 'rxjs';
 export class RegisterService {
 
 
-  private url:string ="http://localhost:8080/user";
+  private url:string ="http://localhost:8080";
 
   constructor(private http:HttpClient) { }
 
-  register(id:number, username:string, password:string, firstname:string, lastname:string, email:string):Observable<any>{
-    let body ={
-      "username":username,
-      "password":password,
-      "firstname":firstname,
-      "lastname":lastname,
-      "email":email
-
-    };
-    console.log(body);
-    return this.http.post<any>(this.url, body, {})
+  register(thisuser:Register):Observable<Register>{
+    return this.http.post(this.url + "users", thisuser) as Observable<Register>;
   }
+
+
 
   
 }

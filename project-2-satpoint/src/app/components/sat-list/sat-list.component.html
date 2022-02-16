@@ -1,4 +1,4 @@
-<div class="mt-4" *ngFor="let sat of satList">
+<div class="mt-4" *ngFor="let sat of filterSatList()">
   <app-sat-info (togglePanelStateEvent)="togglePanelStateEvent($event)"
     [satname]="sat.satName"
     [satId]="sat.satId"

@@ -7,6 +7,9 @@ import { Sat } from '../models/sat';
   providedIn: 'root',
 })
 export class SatService {
+
+  baseURL: string = "http://localhost:8080/"; //will need to be changed for hosting
+
   public satList: Sat[] = [];
 
   private static joelApiKey = 'NPFFJL-ZH53BK-5ECGZG-4U96';
@@ -27,5 +30,21 @@ export class SatService {
     return this.http.get(
       `/api/satellite/positions/${noradId}/${this.latitude}/${this.longitude}/0/1/&apiKey=${this.apiKey}`
     );
+    }
+
+  getAllSat(): Observable<Sat[]> {
+    return this.http.get<Sat[]>(
+      this.baseURL + 'satellite');
   }
+
+  getSatByUser(userId: number): Observable<Sat[]> {
+    return this.http.get<Sat[]>(
+      this.baseURL + 'satellite/userID/${userId}');
+  }
+
+  getSatFavorites(): Observable<Sat[]> {
+    return this.http.get<Sat[]>(
+      this.baseURL + 'satellite/favorites');
+  }
+
 }
