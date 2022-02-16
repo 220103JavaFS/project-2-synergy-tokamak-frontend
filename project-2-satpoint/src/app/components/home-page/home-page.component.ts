@@ -20,7 +20,7 @@ export class HomePageComponent implements OnInit {
   @Input() showPanel !:boolean;
   tempSatid = "";
   right = SideNavDirection.Right;
-  comments!:any;
+  // comments!:any;
   message='';
   term="";
   page="mainPage";
@@ -46,17 +46,17 @@ export class HomePageComponent implements OnInit {
     
   }
 
-  getComments(){
-    this.comments = this.commentService.getComments(this.satid);
-    return this.comments;
-  }
+  // getComments(){
+  //   this.comments = this.commentService.getComments(this.satid);
+  //   return this.comments;
+  // }
 
   submit(){
     if(this.message){
     this.commentService.sendComment(
      
       new Comment(this.message, 
-      new User(1, "tester", "tester", "tester", "tester"), 
+      new User(1, "tester", "tester", "tester", "tester", ""), 
       new Sat(this.satid, this.satname,"",0), new Date(Date.now()).toLocaleString()));
     }
     this.clear();

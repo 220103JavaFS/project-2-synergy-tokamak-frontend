@@ -15,6 +15,7 @@ export class RegisterComponent implements OnInit {
   firstName:string = "";
   lastName:string = "";
   email:string = "";
+  AboutMe:string = "";
 
   @Output() displayEvent = new EventEmitter<MouseEvent>(); //triggers the parent
 
@@ -39,11 +40,11 @@ export class RegisterComponent implements OnInit {
 
   
   registerUser(): void{
-    if (this.username == "" || this.password == "" || this.firstName == "" || this.lastName == "" || this.email == "" ){
+    if (this.username == "" || this.password == "" || this.firstName == "" || this.lastName == "" || this.email == "" || this.AboutMe == "" ){
       alert ("Please fill out all of the fields");
     }
     else {
-      let user:Register = new Register(0, this.username, this.password, this.firstName, this.lastName, this.email);
+      let user:Register = new Register(0, this.username, this.password, this.firstName, this.lastName, this.email, this.AboutMe);
       console.log(user);
       this.userService.register(user).subscribe(
         (response:Register)=>{
