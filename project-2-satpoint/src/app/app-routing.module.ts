@@ -6,6 +6,7 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { ProfileComponent } from './components/profile/profile.component';
 import { SatInfoComponent } from './components/sat-info/sat-info.component';
 import { SatListComponent } from './components/sat-list/sat-list.component';
+import { UserFavoritesComponent } from './components/user-favorites/user-favorites.component';
 
 const routes: Routes = [
   {path:"", component:LoginComponent, data:['login']},
@@ -14,6 +15,7 @@ const routes: Routes = [
   {path:"sat-info", component:SatInfoComponent, data:['sat-info']},
   {path:"sat-list", component:SatListComponent, data:['sat-list']},
   {path:"homepage", component:HomePageComponent, data:['homepage']},
+  {path:"favorites", component:UserFavoritesComponent, data:['favorites']},
   {path: '**', component:PageNotFoundComponent}
 ];
  

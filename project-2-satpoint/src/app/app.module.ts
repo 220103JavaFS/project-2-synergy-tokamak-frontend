@@ -17,7 +17,7 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { CommentsComponent } from './components/comments/comments.component';
 import { CommentCardsComponent } from './components/comment-cards/comment-cards.component';
 import { FilterComponent } from './components/filter/filter.component';
-
+import { UserFavoritesComponent } from './components/user-favorites/user-favorites.component'
 
 
 @NgModule({
@@ -34,6 +34,7 @@ import { FilterComponent } from './components/filter/filter.component';
     CommentsComponent,
     CommentCardsComponent,
     FilterComponent,
+    UserFavoritesComponent,
   ],
   imports: [
     BrowserModule,
