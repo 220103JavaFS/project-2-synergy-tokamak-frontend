@@ -5,6 +5,7 @@ export class Register {
        public password:string,
        public firstName:string,
        public lastName:string,
-       public email:string
+       public email:string,
+       public AboutMe:string
     ){}
 }
