@@ -1,11 +1,14 @@
 import { Component, OnInit} from '@angular/core';
 import { User } from 'src/app/models/user';
 import { LoginService } from 'src/app/services/login.service';
+import { profileAnimation } from 'src/app/_animations/profileAnimation';
+
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css']
+  styleUrls: ['./profile.component.css'],
+  animations: [profileAnimation]
 })
 export class ProfileComponent implements OnInit {
   aboutMe : String | undefined;
