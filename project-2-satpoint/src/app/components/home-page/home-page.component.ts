@@ -23,6 +23,7 @@ export class HomePageComponent implements OnInit {
   comments!:any;
   message='';
   term="";
+  page="mainPage";
 
   constructor(private loginService:LoginService, private panelService: SidePanelService, private commentService:CommentService) { }
 

@@ -2,16 +2,18 @@ import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { SatService } from 'src/app/services/sat.service';
 import { SidePanelService } from 'src/app/services/side-panel.service';
 
+
 @Component({
   selector: 'app-sat-info',
   templateUrl: './sat-info.component.html',
   styleUrls: ['./sat-info.component.css'],
 })
+
 export class SatInfoComponent implements OnInit {
   @Input() satname: string = '';
   @Input() satId: string = '';
   @Input() url: string = '';
-  @Input() favorites: string = '';
+  @Input() favorites: number = 0;
 
   @Input() latitude: string = '';
   @Input() longitude: string = '';
@@ -32,7 +34,9 @@ export class SatInfoComponent implements OnInit {
     private satService: SatService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(this.satId);
+  }
 
   getTimestampMillis(): number {
     return Number(this.timestamp) * 1000;
@@ -52,6 +56,9 @@ export class SatInfoComponent implements OnInit {
         this.timestamp = positions.timestamp;
       },
     });
+
+
+
   }
 
   toggleSidePanelEvent() {

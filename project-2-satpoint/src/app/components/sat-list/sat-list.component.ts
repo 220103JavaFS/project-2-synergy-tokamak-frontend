@@ -1,4 +1,7 @@
 import { Component, Output, OnInit, Input, EventEmitter } from '@angular/core';
+import { Observable } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
+import { Sat } from 'src/app/models/sat';
 import { SatService } from 'src/app/services/sat.service';
 import { SidePanelService } from 'src/app/services/side-panel.service';
 
@@ -10,51 +13,82 @@ import { SidePanelService } from 'src/app/services/side-panel.service';
 export class SatListComponent implements OnInit {
   @Output() showPanelMethodEvent = new EventEmitter<string>();
   @Input() term = ""
+  @Input() page = ""
 
-  public satList: any[] = [
-    {
-      satName: 'INTERNATIONAL SPACE STATION',
-      satId: 25544,
-      url: 'https://www.nasa.gov/sites/default/files/s132e012209_sm.jpg',
-      numFavorites: 10,
-    },
-    {
-      satName: 'SES 1',
-      satId: 36516,
-      url: '',
-      numFavorites: 3,
-    },
-    {
-      satName: 'NOAA 19',
-      satId: 33591,
-      url: '',
-      numFavorites: 5,
-    },
-  ];
+  baseURL: string = "http://localhost:8080/";
+
+  public globalSatList: Sat[] = [];
+  public userSatList: Sat[] = [];
+  public satList: Sat[] = [];
+
+  responseStatus: number = 0;
+
 
   constructor(
     private satService: SatService,
     private panelService: SidePanelService
   ) {}
 
-  ngOnInit(): void {}
-
-  getSatList(): void {
-    //make api call to our DB and set satList to the list of sat objects we get back
-  }
-
-  filterSatList(){
-    console.log("satlisting");
-    console.log(this.term)
-    if(this.term) {
-    return this.satList.filter(sat => {
-      if(sat.satName.toLowerCase().includes(this.term) || sat.satId.toString().includes(this.term)){
-        return sat;
+  ngOnInit(): void {
+    let id = localStorage.getItem('id');
+    if(this.page = "mainPage")
+    {
+      this.getSatListByFavorites();
+      console.log("setting satlist");
+      console.log(this.globalSatList);
+    }
+    else if(this.page = "userFavorites")
+    {
+      if(id)
+      {
+        this.getSatListByUserFavorites(parseInt(id));
       }
-    })
+        this.satList = this.userSatList;
+    }
   }
-    return this.satList;
+
+  getSatListByFavorites(){
+    //console.log("Subscribing");
+    this.satService.getSatFavorites().subscribe(
+      (response: Sat[]) => {
+        this.globalSatList = response;
+        this.satList = this.globalSatList;
+        console.log("Set global");
+        console.log(this.satList);
+      }
+    )
   }
+
+  getSatListByUserFavorites(id: number){
+    this.satService.getSatFavoritesByUser(id).subscribe(
+      (response: Sat[]) => {
+        this.userSatList = response;
+        
+        //console.log(response);
+      },
+      err => {
+        console.log("Error caught at Subscriber :" + err);
+      },
+      () => console.log("Processing Complete")
+    )
+  }
+
+  public trackItem(index: number, item: Sat){
+    return item.satId;
+  }
+
+  // filterSatList(){
+  //   console.log("satlisting");
+  //   console.log(this.term)
+  //   if(this.term) {
+  //   return this.globalSatList.filter(sat => {
+  //     if(sat.satName.toLowerCase().includes(this.term) || sat.satId.toString().includes(this.term)){
+  //       return sat;
+  //     }
+  //   })
+  // }
+  //   return this.globalSatList;
+  // }
 
   togglePanelStateEvent(info: string) {
     console.log('2');
