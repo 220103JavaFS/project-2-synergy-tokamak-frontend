@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { LoginService } from 'src/app/services/login.service';
 import { SidePanelService } from 'src/app/services/side-panel.service';
 import { SideNavDirection } from '../side-nav-direction';
@@ -47,6 +47,13 @@ export class HomePageComponent implements OnInit {
     this.showPanel = false;
     
   }
+
+  filter(event:string){
+    console.log(event)
+    this.term = event;
+  }
+
+  
 
   // getComments(){
   //   this.comments = this.commentService.getComments(this.satid);

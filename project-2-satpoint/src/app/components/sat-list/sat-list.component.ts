@@ -12,8 +12,8 @@ import { SidePanelService } from 'src/app/services/side-panel.service';
 })
 export class SatListComponent implements OnInit {
   @Output() showPanelMethodEvent = new EventEmitter<string>();
-  @Input() term = ""
   @Input() page = ""
+  @Input() term = ""
 
   baseURL: string = "http://localhost:8080/";
 
@@ -45,6 +45,31 @@ export class SatListComponent implements OnInit {
     }
   }
 
+  filterSatList(){
+    if(this.term) {
+      if(this.page == "mainPage") {
+        return this.globalSatList.filter(sat => {
+          if(sat.satName.toLowerCase().includes(this.term) || sat.satId.toString().includes(this.term)){
+            console.log(sat);
+            return sat;
+          }
+          return;
+        })
+      }
+      else{
+        return this.userSatList.filter(sat => {
+          if(sat.satName.toLowerCase().includes(this.term) || sat.satId.toString().includes(this.term)){
+            return sat;
+          }
+          return;
+        })
+
+      }
+  }
+    return this.globalSatList;
+  }
+
+
   getSatListByFavorites(){
     this.satService.getSatFavorites().subscribe(
       (response: Sat[]) => {
@@ -73,19 +98,6 @@ export class SatListComponent implements OnInit {
   public trackItem(index: number, item: Sat){
     return item.satId;
   }
-
-  // filterSatList(){
-  //   console.log("satlisting");
-  //   console.log(this.term)
-  //   if(this.term) {
-  //   return this.globalSatList.filter(sat => {
-  //     if(sat.satName.toLowerCase().includes(this.term) || sat.satId.toString().includes(this.term)){
-  //       return sat;
-  //     }
-  //   })
-  // }
-  //   return this.globalSatList;
-  // }
 
   togglePanelStateEvent(info: string) {
     console.log('2');

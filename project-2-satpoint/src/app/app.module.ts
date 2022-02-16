@@ -16,6 +16,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { CommentsComponent } from './components/comments/comments.component';
 import { CommentCardsComponent } from './components/comment-cards/comment-cards.component';
+import { FilterComponent } from './components/filter/filter.component';
 
 
 
@@ -32,6 +33,7 @@ import { CommentCardsComponent } from './components/comment-cards/comment-cards.
     PageNotFoundComponent,
     CommentsComponent,
     CommentCardsComponent,
+    FilterComponent,
   ],
   imports: [
     BrowserModule,
