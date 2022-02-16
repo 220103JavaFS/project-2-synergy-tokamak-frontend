@@ -21,4 +21,10 @@ import {
             animate(2000)
         ]),
 
+        transition(":leave", [ //target dom elements entering
+            animate(2000, style({
+                opacity: 0,
+            })), //will animate back to its normal state or style can be included to animate to a style
+        ]),
+
   ])
