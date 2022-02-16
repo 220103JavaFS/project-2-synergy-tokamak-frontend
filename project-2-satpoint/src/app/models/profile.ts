@@ -1,7 +1,9 @@
 export class Update {
     constructor(
-       public firstName:string,
-       public lastName:string,
-       public email:string
+        public firstName : String | undefined,
+        public lastName : String | undefined,
+        public email: String | undefined,
+        public aboutMe : String | undefined
+
     ){}
 }
