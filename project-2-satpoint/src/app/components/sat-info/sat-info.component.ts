@@ -67,12 +67,15 @@ export class SatInfoComponent implements OnInit {
   toggleSidePanelEvent() {
     //this.panelService.togglePanelState();
     this.panelService.setShowPanel(true);
-    console.log('1');
+    console.log(this.satId)
+    console.log(this.satname)
+
 
     this.togglePanelStateEvent.emit({
       showPanel: this.panelService.getShowPanel(),
       name: this.satname,
       id: this.satId,
+      satNoradId: this.noradId
     });
   }
 }

@@ -6,6 +6,6 @@ export class Register {
        public firstName:string,
        public lastName:string,
        public email:string,
-       public AboutMe:string
+       public aboutMe:string
     ){}
 }

@@ -7,23 +7,38 @@ import { CommentService } from 'src/app/services/comment.service';
   styleUrls: ['./comment-cards.component.css']
 })
 export class CommentCardsComponent implements OnInit {
-  comments!:any;
+  @Input() comments!:any[];
   @Input() satid=0;
   @Input() satNoradId="";
-  @Input() username: String | undefined;
+  @Input() username: string | undefined;
   @Input() onUserProfile = false;
+  @Input() refresh = false;
 
 
   constructor(private commentService:CommentService) { }
 
   ngOnInit(): void {
-  }
+    this.username = sessionStorage.getItem("username") || undefined;
+    if(this.satNoradId) this.commentService.getComments(this.satNoradId).subscribe(res =>{
+      this.comments = res.reverse();
+      console.log(res);
+    });
+}
+
 
   
   getComments(){
-    if(this.satid) return this.commentService.getComments(this.satNoradId);
-    if(this.username) return this.commentService.getUserComments(this.username);
-    // this.comments = this.commentService.getComments(this.satid);
+    console.log("in comment cards");
+    console.log(this.satNoradId);
+    if(this.satNoradId) this.commentService.getComments(this.satNoradId).subscribe(res =>{
+      console.log(res);
+      this.comments = res;
+    });
+  
+        
+    // if(this.username) return this.commentService.getUserComments(this.username);
+    // // this.comments = this.commentService.getComments(this.satid);
     return this.comments;
-  }
+  
+}
 }

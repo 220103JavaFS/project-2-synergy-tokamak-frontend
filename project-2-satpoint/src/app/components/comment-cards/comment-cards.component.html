@@ -1,14 +1,10 @@
-
-
-
-
-<div class="m-2" *ngFor="let comment of getComments()">
+<div class="m-2" *ngFor="let comment of comments">
     <div class="m-3 p-5"
     [ngClass]=" !onUserProfile ? ' bg-primary bg-opacity-25': 'bg-light'" >
     <div *ngIf="onUserProfile" class="text-end">
         {{comment.sat.name}} {{comment.sat.id}}
     </div>  
       <p class="fs-5 fw-bold">{{comment.user.username}}</p>
-      <p>{{comment.description}}</p>
+      <p>{{comment.comment}}</p>
       <p class="pt-3 fst-italic text-end">Date:{{comment.date}}</p>
 </div>

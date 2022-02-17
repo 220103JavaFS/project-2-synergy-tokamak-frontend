@@ -48,6 +48,10 @@ export class SatService {
 
   getSatFavorites(): Observable<Sat[]> {
     return this.http.get<Sat[]>(
-      'http://localhost:8080/satellites/favorites')
+      'http://localhost:8080/satellites/favorites', 
+      // {
+      //   withCredentials:true
+      // }
+      )
   }
 }

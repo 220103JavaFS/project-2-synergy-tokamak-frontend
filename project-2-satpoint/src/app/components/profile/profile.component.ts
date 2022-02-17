@@ -18,7 +18,7 @@ export class ProfileComponent implements OnInit {
   lastName : String | undefined;
   email: String | undefined;
   
-  username: String | undefined;
+  username: string | undefined;
   showFav = false;
   showCom = false;
   satid = ""
@@ -27,15 +27,17 @@ export class ProfileComponent implements OnInit {
 
 
   ngOnInit(): void {
+    if(!this.loginService.currentUser){
     this.loginService.getUser(sessionStorage.getItem("username")).subscribe(user => {
         this.loginService.currentUser = user;  
         this.aboutMe = user.aboutMe;
         this.email = user.email;
         this.firstName = user.firstName;
         this.lastName = user.lastName;
-        this.username = user.username;
+        this.username = user.username || "";
         console.log(this.loginService.currentUser)
   })
+}
   }
 
   showFavorites(){

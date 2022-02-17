@@ -1,6 +1,4 @@
 import { Component, Output, OnInit, Input, EventEmitter } from '@angular/core';
-import { Observable } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
 import { Sat } from 'src/app/models/sat';
 import { SatService } from 'src/app/services/sat.service';
 import { SidePanelService } from 'src/app/services/side-panel.service';
@@ -12,8 +10,8 @@ import { SidePanelService } from 'src/app/services/side-panel.service';
 })
 export class SatListComponent implements OnInit {
   @Output() showPanelMethodEvent = new EventEmitter<string>();
-  @Input() term = '';
-  @Input() page = '';
+  @Input() page = ""
+  @Input() term = ""
 
   baseURL: string = 'http://localhost:8080/';
 
@@ -52,9 +50,10 @@ export class SatListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    let id = localStorage.getItem('id');
-    if (this.page == 'mainPage') {
-      console.log('Getting global favorites');
+    let id = sessionStorage.getItem('userId');
+    if(this.page = "mainPage")
+    {
+      console.log("Getting global favorites");
       this.getSatListByFavorites();
     } else if (this.page == 'userFavorites') {
       if (id) {
@@ -66,11 +65,38 @@ export class SatListComponent implements OnInit {
     }
   }
 
-  getSatListByFavorites() {
-    this.satService.getSatFavorites().subscribe((response: Sat[]) => {
-      this.globalSatList = response;
-      this.satList = this.globalSatList;
-    });
+  filterSatList(){
+    if(this.term) {
+      if(this.page == "mainPage") {
+        return this.globalSatList.filter(sat => {
+          if(sat.satName.toLowerCase().includes(this.term) || sat.noradId.toString().includes(this.term)){
+            console.log(sat);
+            return sat;
+          }
+          return;
+        })
+      }
+      else{
+        return this.userSatList.filter(sat => {
+          if(sat.satName.toLowerCase().includes(this.term) || sat.satId.toString().includes(this.term)){
+            return sat;
+          }
+          return;
+        })
+
+      }
+  }
+    return this.globalSatList;
+  }
+
+
+  getSatListByFavorites(){
+    this.satService.getSatFavorites().subscribe(
+      (response: Sat[]) => {
+        this.globalSatList = response;
+        this.satList = this.globalSatList;
+      }
+    )
   }
 
   getSatListByUserFavorites(id: number) {
@@ -91,21 +117,9 @@ export class SatListComponent implements OnInit {
     return item.satId;
   }
 
-  // filterSatList(){
-  //   console.log("satlisting");
-  //   console.log(this.term)
-  //   if(this.term) {
-  //   return this.globalSatList.filter(sat => {
-  //     if(sat.satName.toLowerCase().includes(this.term) || sat.satId.toString().includes(this.term)){
-  //       return sat;
-  //     }
-  //   })
-  // }
-  //   return this.globalSatList;
-  // }
-
   togglePanelStateEvent(info: string) {
-    console.log('2');
+    console.log("in sat list event");
+    console.log(info)
 
     this.showPanelMethodEvent.emit(info);
   }
