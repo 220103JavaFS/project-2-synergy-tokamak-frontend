@@ -43,6 +43,10 @@ export class CommentService {
     return respone;
 }
 
+deleteComment(commentId:string){
+  return this.http.delete(this.url+"delete/"+commentId);
+}
+
 private handleError<T>(operation = 'operation', result?: T) {
   return (error: any): Observable<T> => {
     return of(result as T);

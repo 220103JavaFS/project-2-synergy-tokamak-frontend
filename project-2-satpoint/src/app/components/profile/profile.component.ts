@@ -72,4 +72,15 @@ export class ProfileComponent implements OnInit {
     )
   } 
 
+
+  delete(event:boolean){
+    if(this.username) {
+    this.commentService.getUserComments(this.username).subscribe( out => {
+      
+        this.comments = out;
+      
+      
+    })
+  }
+  }
 }

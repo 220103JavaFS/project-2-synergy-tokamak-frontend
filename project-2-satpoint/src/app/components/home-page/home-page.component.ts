@@ -65,6 +65,7 @@ export class HomePageComponent implements OnInit {
       console.log(sessionStorage.getItem("userId"))
     this.commentService.sendComment(sessionStorage.getItem("userId") || "", this.satNoradId, this.message, new Date(Date.now()).toLocaleString()).subscribe( out => {
       this.comments = out.reverse();
+      
     })
     
     }
@@ -78,6 +79,16 @@ export class HomePageComponent implements OnInit {
 
   clear(){
     this.message="";
+  }
+
+  delete(event:boolean){
+    this.commentService.getComments(this.satNoradId).subscribe( out => {
+      
+      
+      if(out) this.comments = out.reverse();
+      else this.comments = [];      
+      
+    })
   }
 
 }
