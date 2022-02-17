@@ -25,6 +25,7 @@ export class HomePageComponent implements OnInit {
   term="";
   page="mainPage";
   refresh = false;
+  comments!:any[]
 
   constructor(private loginService:LoginService, private panelService: SidePanelService, private commentService:CommentService) { }
 
@@ -62,8 +63,7 @@ export class HomePageComponent implements OnInit {
       console.log(this.satNoradId)
       console.log(sessionStorage.getItem("userId"))
     this.commentService.sendComment(sessionStorage.getItem("userId") || "", this.satNoradId, this.message, new Date(Date.now()).toLocaleString()).subscribe( out => {
-      console.log(out);
-      this.refresh = true;
+      this.comments = out;
     })
     
     }

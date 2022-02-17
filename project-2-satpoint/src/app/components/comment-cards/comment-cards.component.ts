@@ -7,7 +7,7 @@ import { CommentService } from 'src/app/services/comment.service';
   styleUrls: ['./comment-cards.component.css']
 })
 export class CommentCardsComponent implements OnInit {
-  comments!:any;
+  @Input() comments!:any[];
   @Input() satid=0;
   @Input() satNoradId="";
   @Input() username: string | undefined;
@@ -20,7 +20,7 @@ export class CommentCardsComponent implements OnInit {
   ngOnInit(): void {
     this.username = sessionStorage.getItem("username") || undefined;
     if(this.satNoradId) this.commentService.getComments(this.satNoradId).subscribe(res =>{
-      this.comments = res;
+      this.comments = res.reverse();
       console.log(res);
     });
 }
