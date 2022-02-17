@@ -1,8 +1,10 @@
 import { Component, OnInit} from '@angular/core';
 import { Update } from 'src/app/models/profile';
 import { User } from 'src/app/models/user';
+import { CommentService } from 'src/app/services/comment.service';
 import { LoginService } from 'src/app/services/login.service';
 import { ProfileService } from 'src/app/services/profile.service';
+import { SatService } from 'src/app/services/sat.service';
 import { profileAnimation } from 'src/app/_animations/profileAnimation';
 
 
@@ -23,8 +25,9 @@ export class ProfileComponent implements OnInit {
   showCom = false;
   satid = ""
   page = ""
+  comments!:any[]
 
-  constructor(private loginService:LoginService, private profileService:ProfileService) { }
+  constructor(private loginService:LoginService, private profileService:ProfileService, private commentService:CommentService) { }
 
 
   ngOnInit(): void {
@@ -51,6 +54,13 @@ export class ProfileComponent implements OnInit {
     console.log(this.page)
     this.showCom = !this.showCom;
     console.log(this.showCom)
+    let username = sessionStorage.getItem("username");
+    if(username) {
+      this.commentService.getUserComments(username).subscribe(response => {
+        console.log(response)
+       this.comments = response;
+      });
+    }
   }
 
   updateUser(): void{

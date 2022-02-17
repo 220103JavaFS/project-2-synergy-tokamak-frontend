@@ -68,7 +68,7 @@
         <button (click)="showFavorites()">Show Favorites</button>
         <app-sat-list [page]="page" *ngIf="showFav" [@dropMenu]></app-sat-list>
         <button (click)="showComments()">Show Comments</button>
-        <app-comment-cards *ngIf="showCom" [onUserProfile]="showCom" [username]="username" [@dropMenu]></app-comment-cards>
+        <app-comment-cards *ngIf="showCom" [onUserProfile]="showCom" [username]="username" [comments]="comments" [@dropMenu]></app-comment-cards>
 
     </div>      
         
