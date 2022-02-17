@@ -1,4 +1,5 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { FavoriteService } from 'src/app/services/favorite.service';
 import { SatService } from 'src/app/services/sat.service';
 import { SidePanelService } from 'src/app/services/side-panel.service';
 
@@ -27,12 +28,14 @@ export class SatInfoComponent implements OnInit {
   @Input() declination: string = '';
 
   @Input() timestamp: string = '';
+  @Input() isFavorite: boolean = false;
 
   @Output() togglePanelStateEvent = new EventEmitter<any>();
 
   constructor(
     private panelService: SidePanelService,
-    private satService: SatService
+    private satService: SatService,
+    private favService: FavoriteService
   ) {}
 
   ngOnInit(): void {
@@ -59,9 +62,16 @@ export class SatInfoComponent implements OnInit {
         this.timestamp = positions.timestamp;
       },
     });
+  }
 
-
-
+  favorite(): void{
+    if(this.isFavorite){
+      this.favService.removeFavorite(this.noradId);
+      this.isFavorite = false;
+    }else{
+      this.favService.setFavorite(this.noradId);
+      this.isFavorite = true;
+    }
   }
 
   toggleSidePanelEvent() {

@@ -32,7 +32,7 @@
 
           <p class="cart-text m-0">Favorites: {{numFavorites}}</p>
           
-          <button class="btn btn-secondary">Fav</button>
+          <button class="btn" [class.btn-success]="!isFavorite" [class.btn-secondary]="isFavorite" (click)="favorite()">{{isFavorite?"Unfav":"Fav"}}</button>
 
           <p class="card-text text-end">
             <small class="text-muted">{{

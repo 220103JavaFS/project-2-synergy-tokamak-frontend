@@ -10,8 +10,8 @@ import { SidePanelService } from 'src/app/services/side-panel.service';
 })
 export class SatListComponent implements OnInit {
   @Output() showPanelMethodEvent = new EventEmitter<string>();
-  @Input() page = ""
-  @Input() term = ""
+  @Input() page = '';
+  @Input() term = '';
 
   baseURL: string = 'http://localhost:8080/';
 
@@ -25,6 +25,7 @@ export class SatListComponent implements OnInit {
       noradId: '25544',
       satPicture: 'https://www.nasa.gov/sites/default/files/s132e012209_sm.jpg',
       numFavorites: 10,
+      favorite: true,
     },
     {
       satName: 'SES 1',
@@ -32,6 +33,7 @@ export class SatListComponent implements OnInit {
       noradId: '36516',
       satPicture: '',
       numFavorites: 3,
+      favorite: true,
     },
     {
       satName: 'NOAA 19',
@@ -39,6 +41,7 @@ export class SatListComponent implements OnInit {
       noradId: '33591',
       satPicture: '',
       numFavorites: 5,
+      favorite: false
     },
   ];
 
@@ -51,70 +54,66 @@ export class SatListComponent implements OnInit {
 
   ngOnInit(): void {
     let id = sessionStorage.getItem('userId');
-    if(this.page == "mainPage")
-    {
-      console.log("Getting global favorites");
+    if (this.page == 'mainPage') {
+      console.log('Getting global favorites');
       this.getSatListByFavorites();
-    }
-    else if(this.page == "userFavorites")
-    {
-      console.log(id)
-      if(id)
-      {
+    } else if (this.page == 'userFavorites') {
+      console.log(id);
+      if (id) {
         this.getSatListByUserFavorites(parseInt(id));
         this.satList = this.userSatList;
         console.log('Getting user favorites');
-      }
-      else {
-        console.log("Error getting user favorites");
+      } else {
+        console.log('Error getting user favorites');
       }
     }
   }
 
-  filterSatList(){
-    console.log(this.page)
-    if(this.term) {
-      if(this.page == "mainPage") {
-        return this.globalSatList.filter(sat => {
-          if(sat.satName.toLowerCase().includes(this.term) || sat.noradId.toString().includes(this.term)){
+  filterSatList() {
+    console.log(this.page);
+    if (this.term) {
+      if (this.page == 'mainPage') {
+        return this.globalSatList.filter((sat) => {
+          if (
+            sat.satName.toLowerCase().includes(this.term) ||
+            sat.noradId.toString().includes(this.term)
+          ) {
             console.log(sat);
             return sat;
           }
           return;
-        })
-      }
-      else{
-        console.log("favories filter")
-        return this.userSatList.filter(sat => {
-          if(sat.satName.toLowerCase().includes(this.term) || sat.satId.toString().includes(this.term)){
-            console.log(sat)
+        });
+      } else {
+        console.log('favories filter');
+        return this.userSatList.filter((sat) => {
+          if (
+            sat.satName.toLowerCase().includes(this.term) ||
+            sat.satId.toString().includes(this.term)
+          ) {
+            console.log(sat);
             return sat;
           }
           return;
-        })
-
+        });
       }
-  }
-    if(this.page == "mainPage") return this.globalSatList;
+    }
+    if (this.page == 'mainPage') return this.globalSatList;
     else return this.userSatList;
   }
 
-
-  getSatListByFavorites(){
-    this.satService.getSatFavorites().subscribe(
-      (response: Sat[]) => {
-        this.globalSatList = response;
-        this.satList = this.globalSatList;
-      }
-    )
+  getSatListByFavorites() {
+    this.satService.getSatFavorites().subscribe((response: Sat[]) => {
+      this.globalSatList = response;
+      this.satList = this.globalSatList;
+    });
   }
 
-  getSatListByUserFavorites(id: number){
+  getSatListByUserFavorites(id: number) {
     console.log(id);
-    console.log("in get sat list by user")
+    console.log('in get sat list by user');
     this.satService.getSatFavoritesByUser(id).subscribe(
       (response: Sat[]) => {
-        this.userSatList = response;        
+        this.userSatList = response;
         console.log(response);
       },
       (err) => {
@@ -129,8 +128,8 @@ export class SatListComponent implements OnInit {
   }
 
   togglePanelStateEvent(info: string) {
-    console.log("in sat list event");
-    console.log(info)
+    console.log('in sat list event');
+    console.log(info);
 
     this.showPanelMethodEvent.emit(info);
   }
