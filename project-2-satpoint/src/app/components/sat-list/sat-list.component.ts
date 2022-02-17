@@ -1,6 +1,4 @@
 import { Component, Output, OnInit, Input, EventEmitter } from '@angular/core';
-import { Observable } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
 import { Sat } from 'src/app/models/sat';
 import { SatService } from 'src/app/services/sat.service';
 import { SidePanelService } from 'src/app/services/side-panel.service';
@@ -30,7 +28,7 @@ export class SatListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    let id = localStorage.getItem('id');
+    let id = sessionStorage.getItem('userId');
     if(this.page = "mainPage")
     {
       console.log("Getting global favorites");

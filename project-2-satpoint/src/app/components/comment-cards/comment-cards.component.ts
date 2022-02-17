@@ -10,7 +10,7 @@ export class CommentCardsComponent implements OnInit {
   comments!:any;
   @Input() satid=0;
   @Input() satNoradId="";
-  @Input() username: String | undefined;
+  @Input() username: string | undefined;
   @Input() onUserProfile = false;
 
 

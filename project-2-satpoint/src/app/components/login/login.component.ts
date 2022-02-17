@@ -59,8 +59,6 @@ export class LoginComponent implements OnInit {
     let satpoint = <HTMLHeadingElement>document.getElementById("satpoint");
     if(username.checkValidity() && password.checkValidity()) {
       this.login(username.value, password.value);
-      username.classList.remove("is-invalid");
-      password.classList.remove("is-invalid");
     } 
     else {
   
@@ -91,35 +89,28 @@ export class LoginComponent implements OnInit {
 }
 
   private login(username:string, password:string){
-    let satpoint = <HTMLHeadingElement>document.getElementById("satpoint");
     this.loginService.login(username, password).subscribe(out => 
       {
-        if(out){
-          console.log(out);
-          this.loginService.getUser(username).subscribe(user => {
-              console.log(user);
-              this.loginService.currentUser = user;   
-              sessionStorage.setItem("userId",out[0]);
-              sessionStorage.setItem("username", out[1]);
-              this.router.navigateByUrl("/homepage");
-              
+        console.log(out)
+        if(out){ 
+          console.log(out.headers);
 
-              if(this.loginService.currentUser){
-                satpoint.classList.remove("is-invalid"); //temp
-                this.badLogin = false;
-              }else {
-                satpoint.classList.add("is-invalid");
+              if(out === undefined){
                 this.badLogin = true;
-            }
-
-          })
-                 
+              }else {
+                this.badLogin = false;
+                sessionStorage.setItem("userId",out[0]);
+                sessionStorage.setItem("username", out[1]);
+                this.router.navigateByUrl("/homepage");
+            }    
         }
         
     });
   
   
   }
+
+
 
 
 }

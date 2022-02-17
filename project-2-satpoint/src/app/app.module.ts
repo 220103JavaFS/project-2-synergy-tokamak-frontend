@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -18,6 +18,7 @@ import { CommentsComponent } from './components/comments/comments.component';
 import { CommentCardsComponent } from './components/comment-cards/comment-cards.component';
 import { FilterComponent } from './components/filter/filter.component';
 import { UserFavoritesComponent } from './components/user-favorites/user-favorites.component'
+import { MyInterceptor } from './services/http-interceptor.service';
 
 
 @NgModule({
@@ -44,7 +45,9 @@ import { UserFavoritesComponent } from './components/user-favorites/user-favorit
     FormsModule
 
   ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: MyInterceptor, multi:true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

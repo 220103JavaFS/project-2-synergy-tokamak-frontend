@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { User } from '../models/user';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { catchError, Observable, of} from 'rxjs';
 
 
@@ -20,7 +20,10 @@ export class LoginService {
         "username":username,
         "password":password
       }; 
-      let respone = this.http.post<any>(this.url, body).pipe(
+      let respone = this.http.post<any>(this.url, body, {
+        observe:"response",
+        withCredentials:true
+        }).pipe(
         catchError(this.handleError<any>('login', undefined))
       );
       
@@ -28,9 +31,13 @@ export class LoginService {
       
       return respone;
   }
+
+  
+
   getUser(username:string | null):Observable<any>{
     let res = this.http.get<any>(this.url+"getUser/"+username);
     console.log(res);
+
     return res;
   }
 
