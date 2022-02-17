@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { CommentService } from 'src/app/services/comment.service';
 
 @Component({
@@ -13,7 +13,10 @@ export class CommentCardsComponent implements OnInit {
   @Input() username: string | undefined;
   @Input() onUserProfile = false;
   @Input() refresh = false;
+ 
   userId: string | undefined;
+
+  @Output() deleteEvent = new EventEmitter<boolean>();
 
 
   constructor(private commentService:CommentService) { }
@@ -22,7 +25,7 @@ export class CommentCardsComponent implements OnInit {
     this.username = sessionStorage.getItem("username") || undefined;
     this.userId = sessionStorage.getItem("userId") || undefined;
     if(this.satNoradId) this.commentService.getComments(this.satNoradId).subscribe(res =>{
-      this.comments = res.reverse();
+      if(res) this.comments = res.reverse();
       console.log(res);
     });
 }
@@ -43,4 +46,12 @@ export class CommentCardsComponent implements OnInit {
     return this.comments;
   
 }
+
+  delete(event:MouseEvent){
+      //console.log((<HTMLButtonElement>event.target).id)
+
+      this.commentService.deleteComment((<HTMLButtonElement>event.target).id).subscribe(res => {
+        this.deleteEvent.emit(true);
+      })
+  }
 }

@@ -1,5 +1,5 @@
 <div class="m-2" *ngFor="let comment of comments">
-    <div class="m-3 p-5"
+    <div id={{comment.commentId}} class="m-3 p-5"
     [ngClass]=" !onUserProfile ? ' bg-primary bg-opacity-25': 'bg-light'" >
     <!-- <div *ngIf="onUserProfile" class="text-end">
         {{comment.sat.name}} {{comment.sat.id}}
@@ -8,7 +8,7 @@
         <p class="fs-5 fw-bold">{{comment.user.username}}</p>
     </div> 
       <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3" *ngIf="comment.user.id == userId">
-        <button type="button" class="btn-close me-md-2 btn-outline-danger" aria-label="Delete"></button>
+        <button id={{comment.commentId}} (click)="delete($event)" type="button" class="btn-close me-md-2 btn-outline-danger" aria-label="Delete"></button>
       </div>
       
 
