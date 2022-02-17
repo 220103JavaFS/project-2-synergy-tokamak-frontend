@@ -27,24 +27,27 @@ export class SatService {
   constructor(private http: HttpClient) {}
 
   getSatLocData(noradId: string): Observable<any> {
+    console.log(noradId);
     return this.http.get(
       `/api/satellite/positions/${noradId}/${this.latitude}/${this.longitude}/0/1/&apiKey=${this.apiKey}`
     );
     }
+
+
+
 
   getAllSat(): Observable<Sat[]> {
     return this.http.get<Sat[]>(
       this.baseURL + 'satellite');
   }
 
-  getSatByUser(userId: number): Observable<Sat[]> {
+  getSatFavoritesByUser(userId: number): Observable<Sat[]> {
     return this.http.get<Sat[]>(
-      this.baseURL + 'satellite/userID/${userId}');
+      this.baseURL + 'satellites/userId/${userId}');
   }
 
   getSatFavorites(): Observable<Sat[]> {
     return this.http.get<Sat[]>(
-      this.baseURL + 'satellite/favorites');
+      'http://localhost:8080/satellites/favorites')
   }
-
 }

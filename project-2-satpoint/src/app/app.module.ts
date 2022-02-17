@@ -15,7 +15,8 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { RegisterComponent } from './components/register/register.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { CommentsComponent } from './components/comments/comments.component';
-
+import { CommentCardsComponent } from './components/comment-cards/comment-cards.component';
+import { UserFavoritesComponent } from './components/user-favorites/user-favorites.component'
 
 
 @NgModule({
@@ -30,6 +31,8 @@ import { CommentsComponent } from './components/comments/comments.component';
     RegisterComponent,
     PageNotFoundComponent,
     CommentsComponent,
+    CommentCardsComponent,
+    UserFavoritesComponent,
   ],
   imports: [
     BrowserModule,

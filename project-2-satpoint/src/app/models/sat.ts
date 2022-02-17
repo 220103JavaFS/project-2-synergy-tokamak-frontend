@@ -1,8 +1,9 @@
 export class Sat {
   constructor(
-    public id: string,
-    public name: string,
-    public url: string,
-    public favorites: number
+    public satId: number,
+    public noradId: string,
+    public satName: string,
+    public satPicture: string,
+    public numFavorites: number
   ) {}
 }

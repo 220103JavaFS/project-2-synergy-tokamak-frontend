@@ -61,7 +61,6 @@ export class LoginComponent implements OnInit {
       this.login(username.value, password.value);
       username.classList.remove("is-invalid");
       password.classList.remove("is-invalid");
-      //route to user's profile
     } 
     else {
   
@@ -93,32 +92,31 @@ export class LoginComponent implements OnInit {
 
   private login(username:string, password:string){
     let satpoint = <HTMLHeadingElement>document.getElementById("satpoint");
-  //   this.loginService.login(username, password).subscribe(out => 
-  //     {
-  //       if(out){
-  //         console.log(out);
-  //         this.loginService.user = out;          
-  //       }
-  //       if(this.loginService.user){
-  //         satpoint.classList.remove("is-invalid"); //temp
-  //         this.badLogin = false;
-          
-  //       }else {
-  //         satpoint.classList.add("is-invalid");
-  //         this.badLogin = true;
-          
-  //       }
-  //   });
-  
-  this.loginService.login(username, password);
-  console.log(this.loginService.getCurrentUser());
-  if(this.loginService.getCurrentUser()) {
-    this.router.navigateByUrl("/homepage");
-  }
-  else {
-    satpoint.classList.add("is-invalid");
-    this.badLogin = true;
-    }
+    this.loginService.login(username, password).subscribe(out => 
+      {
+        if(out){
+          console.log(out);
+          this.loginService.getUser(username).subscribe(user => {
+              console.log(user);
+              this.loginService.currentUser = user;   
+              sessionStorage.setItem("userId",out[0]);
+              sessionStorage.setItem("username", out[1]);
+              this.router.navigateByUrl("/homepage");
+              
+
+              if(this.loginService.currentUser){
+                satpoint.classList.remove("is-invalid"); //temp
+                this.badLogin = false;
+              }else {
+                satpoint.classList.add("is-invalid");
+                this.badLogin = true;
+            }
+
+          })
+                 
+        }
+        
+    });
   
   
   }

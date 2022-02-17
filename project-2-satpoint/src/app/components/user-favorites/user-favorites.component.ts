@@ -9,11 +9,12 @@ import { Comment } from 'src/app/models/comment';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
-  selector: 'app-home-page',
-  templateUrl: './home-page.component.html',
-  styleUrls: ['./home-page.component.css']
+  selector: 'app-user-favorites',
+  templateUrl: './user-favorites.component.html',
+  styleUrls: ['./user-favorites.component.css']
 })
-export class HomePageComponent implements OnInit {
+export class UserFavoritesComponent implements OnInit {
+
 
   @Output() satname="";
   @Output() satid=0;
@@ -24,7 +25,7 @@ export class HomePageComponent implements OnInit {
   // comments!:any;
   message='';
   term="";
-  page="mainPage";
+  page="userFavorites";
 
   constructor(private loginService:LoginService, private panelService: SidePanelService, private commentService:CommentService) { }
 

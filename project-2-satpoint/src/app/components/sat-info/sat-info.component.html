@@ -2,12 +2,12 @@
   <div class="card border-primary border-2 mb-3" style="max-width: 960px">
     <div class="row g-0">
       <div class="col-4 row align-items-center p-3">
-        <img *ngIf="url.length!=0"
-          [src]='url'
+        <img *ngIf="satPicture"
+          [src]='satPicture'
           class="img-fluid mx-auto rounded-start"
           alt=""
         />
-        <img *ngIf="url.length==0" src='../../../assets/sat.png'/>
+        <img *ngIf="!satPicture" src='../../../assets/sat.png'/>
       </div>
       <div class="col-8">
         <div class="card-body">
@@ -16,7 +16,7 @@
               <h5 class="card-title text-start">{{ satname }}</h5>
             </div>
             <div class="col-3">
-              <h5 class="card-title text-end">{{ satId }}</h5>
+              <h5 class="card-title text-end">{{ noradId }}</h5>
             </div>
           </div>
 
@@ -30,7 +30,7 @@
           </p>
           <p class="card-text m-0">Declination: {{ declination }}</p>
 
-          <p class="cart-text m-0">Favorites: {{favorites}}</p>
+          <p class="cart-text m-0">Favorites: {{numFavorites}}</p>
           
           <button class="btn btn-secondary">Fav</button>
 
