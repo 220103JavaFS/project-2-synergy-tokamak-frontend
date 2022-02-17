@@ -26,12 +26,15 @@ export class CommentService {
   }
 
   sendComment(userId:string, noradId:string, message:string, date:string):Observable<any[]> {
+    console.log(userId)
+    console.log(noradId)
     let body = {
       userId:Number.parseInt(userId),
       noradId:Number.parseInt(noradId),
       message: message,
       date: date
     }; 
+    console.log(body);
     let respone = this.http.post<any>(this.url, body).pipe(
       catchError(this.handleError<any>('sendComment', undefined))
     );

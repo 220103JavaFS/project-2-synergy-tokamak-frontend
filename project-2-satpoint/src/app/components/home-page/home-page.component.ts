@@ -32,10 +32,12 @@ export class HomePageComponent implements OnInit {
   }
 
   showPanelMethod(info:any) {
+    console.log("in homepage")
+    console.log(info)
 
     this.satname = info.name;
     this.satid = info.id;
-    this.satNoradId = info.noradId;
+    this.satNoradId = info.satNoradId;
     this.showPanel = info.showPanel;
     if(this.tempSatid != this.satNoradId) {
       this.clear();
@@ -55,7 +57,10 @@ export class HomePageComponent implements OnInit {
 
   
   submit(){
+    console.log("in homepage submit()")
     if(this.message){
+      console.log(this.satNoradId)
+      console.log(sessionStorage.getItem("userId"))
     this.commentService.sendComment(sessionStorage.getItem("userId") || "", this.satNoradId, this.message, new Date(Date.now()).toLocaleString()).subscribe( out => {
       console.log(out);
     })

@@ -50,7 +50,7 @@ export class SatListComponent implements OnInit {
     if(this.term) {
       if(this.page == "mainPage") {
         return this.globalSatList.filter(sat => {
-          if(sat.satName.toLowerCase().includes(this.term) || sat.satId.toString().includes(this.term)){
+          if(sat.satName.toLowerCase().includes(this.term) || sat.noradId.toString().includes(this.term)){
             console.log(sat);
             return sat;
           }
@@ -99,7 +99,8 @@ export class SatListComponent implements OnInit {
   }
 
   togglePanelStateEvent(info: string) {
-    console.log('2');
+    console.log("in sat list event");
+    console.log(info)
 
     this.showPanelMethodEvent.emit(info);
   }
