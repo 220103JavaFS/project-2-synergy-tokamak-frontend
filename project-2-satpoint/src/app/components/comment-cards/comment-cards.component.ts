@@ -13,12 +13,14 @@ export class CommentCardsComponent implements OnInit {
   @Input() username: string | undefined;
   @Input() onUserProfile = false;
   @Input() refresh = false;
+  userId: string | undefined;
 
 
   constructor(private commentService:CommentService) { }
 
   ngOnInit(): void {
     this.username = sessionStorage.getItem("username") || undefined;
+    this.userId = sessionStorage.getItem("userId") || undefined;
     if(this.satNoradId) this.commentService.getComments(this.satNoradId).subscribe(res =>{
       this.comments = res.reverse();
       console.log(res);

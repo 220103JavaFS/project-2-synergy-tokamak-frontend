@@ -66,9 +66,9 @@
       <div class="col mt-3">
     <div class="d-grid gap-2 mt-5">
         <button (click)="showFavorites()">Show Favorites</button>
-        <app-sat-list *ngIf="showFav" [@dropMenu]></app-sat-list>
+        <app-sat-list [page]="page" *ngIf="showFav" [@dropMenu]></app-sat-list>
         <button (click)="showComments()">Show Comments</button>
-        <app-comment-cards *ngIf="showCom" [onUserProfile]="showCom" [username]="username" [@dropMenu]></app-comment-cards>
+        <app-comment-cards *ngIf="showCom" [onUserProfile]="showCom" [username]="username" [comments]="comments" [@dropMenu]></app-comment-cards>
 
     </div>      
         

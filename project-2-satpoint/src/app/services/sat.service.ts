@@ -43,7 +43,7 @@ export class SatService {
 
   getSatFavoritesByUser(userId: number): Observable<Sat[]> {
     return this.http.get<Sat[]>(
-      this.baseURL + 'satellites/userId/${userId}');
+      this.baseURL + `satellites/userId/${userId}`);
   }
 
   getSatFavorites(): Observable<Sat[]> {

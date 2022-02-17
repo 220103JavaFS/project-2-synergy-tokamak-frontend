@@ -23,13 +23,14 @@ export class HomePageComponent implements OnInit {
   right = SideNavDirection.Right;
   message='';
   term="";
-  page="mainPage";
+  page="";
   refresh = false;
   comments!:any[]
 
   constructor(private loginService:LoginService, private panelService: SidePanelService, private commentService:CommentService) { }
 
   ngOnInit(): void {
+    this.page = "mainPage";
   }
 
   showPanelMethod(info:any) {
@@ -43,7 +44,7 @@ export class HomePageComponent implements OnInit {
     if(this.tempSatid != this.satNoradId) {
       this.clear();
     }
-    this.satNoradId = this.satNoradId;
+    this.tempSatid = this.satNoradId;
     
   }
   closeEvent(event:boolean){
@@ -63,7 +64,7 @@ export class HomePageComponent implements OnInit {
       console.log(this.satNoradId)
       console.log(sessionStorage.getItem("userId"))
     this.commentService.sendComment(sessionStorage.getItem("userId") || "", this.satNoradId, this.message, new Date(Date.now()).toLocaleString()).subscribe( out => {
-      this.comments = out;
+      this.comments = out.reverse();
     })
     
     }
