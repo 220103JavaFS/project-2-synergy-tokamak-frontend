@@ -43,7 +43,7 @@ export class HomePageComponent implements OnInit {
     if(this.tempSatid != this.satNoradId) {
       this.clear();
     }
-    this.satNoradId = this.satNoradId;
+    this.tempSatid = this.satNoradId;
     
   }
   closeEvent(event:boolean){

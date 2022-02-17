@@ -26,6 +26,7 @@ export class UserFavoritesComponent implements OnInit {
   message='';
   term="";
   page="userFavorites";
+  @Input() comments!:any[]
 
   constructor(private loginService:LoginService, private panelService: SidePanelService, private commentService:CommentService) { }
 
@@ -48,11 +49,13 @@ export class UserFavoritesComponent implements OnInit {
     this.showPanel = false;
     
   }
-
   submit(){
+    console.log("in homepage submit()")
     if(this.message){
+      console.log(this.satNoradId)
+      console.log(sessionStorage.getItem("userId"))
     this.commentService.sendComment(sessionStorage.getItem("userId") || "", this.satNoradId, this.message, new Date(Date.now()).toLocaleString()).subscribe( out => {
-      console.log(out);
+      this.comments = out.reverse();
     })
     
     }
