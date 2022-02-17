@@ -23,13 +23,14 @@ export class HomePageComponent implements OnInit {
   right = SideNavDirection.Right;
   message='';
   term="";
-  page="mainPage";
+  page="";
   refresh = false;
   comments!:any[]
 
   constructor(private loginService:LoginService, private panelService: SidePanelService, private commentService:CommentService) { }
 
   ngOnInit(): void {
+    //this.page = "mainPage";
   }
 
   showPanelMethod(info:any) {

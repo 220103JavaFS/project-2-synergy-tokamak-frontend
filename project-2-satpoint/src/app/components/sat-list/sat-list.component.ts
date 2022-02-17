@@ -29,24 +29,28 @@ export class SatListComponent implements OnInit {
 
   ngOnInit(): void {
     let id = sessionStorage.getItem('userId');
-    if(this.page = "mainPage")
+    if(this.page == "mainPage")
     {
       console.log("Getting global favorites");
       this.getSatListByFavorites();
     }
-    else if(this.page = "userFavorites")
+    else if(this.page == "userFavorites")
     {
+      console.log(id)
       if(id)
       {
         this.getSatListByUserFavorites(parseInt(id));
         this.satList = this.userSatList;
         console.log("Getting user favorites");
       }
+      else {
         console.log("Error getting user favorites");
+      }
     }
   }
 
   filterSatList(){
+    console.log(this.page)
     if(this.term) {
       if(this.page == "mainPage") {
         return this.globalSatList.filter(sat => {
@@ -58,8 +62,10 @@ export class SatListComponent implements OnInit {
         })
       }
       else{
+        console.log("favories filter")
         return this.userSatList.filter(sat => {
           if(sat.satName.toLowerCase().includes(this.term) || sat.satId.toString().includes(this.term)){
+            console.log(sat)
             return sat;
           }
           return;
@@ -67,7 +73,8 @@ export class SatListComponent implements OnInit {
 
       }
   }
-    return this.globalSatList;
+    if(this.page == "mainPage") return this.globalSatList;
+    else return this.userSatList;
   }
 
 
@@ -81,11 +88,12 @@ export class SatListComponent implements OnInit {
   }
 
   getSatListByUserFavorites(id: number){
+    console.log(id);
+    console.log("in get sat list by user")
     this.satService.getSatFavoritesByUser(id).subscribe(
       (response: Sat[]) => {
-        this.userSatList = response;
-        
-        //console.log(response);
+        this.userSatList = response;        
+        console.log(response);
       },
       err => {
         console.log("Error caught at Subscriber :" + err);

@@ -22,6 +22,7 @@ export class ProfileComponent implements OnInit {
   showFav = false;
   showCom = false;
   satid = ""
+  page = ""
 
   constructor(private loginService:LoginService, private profileService:ProfileService) { }
 
@@ -43,8 +44,11 @@ export class ProfileComponent implements OnInit {
   showFavorites(){
     console.log(this.showFav)
       this.showFav = !this.showFav;
+      this.page = "userFavorites"
   }
   showComments(){
+    console.log('page in profile')
+    console.log(this.page)
     this.showCom = !this.showCom;
     console.log(this.showCom)
   }
