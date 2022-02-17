@@ -31,12 +31,12 @@ export class SatListComponent implements OnInit {
 
   ngOnInit(): void {
     let id = localStorage.getItem('id');
-    if(this.page = "mainPage")
+    if(this.satService.checkRoute() === 'homepage')
     {
       console.log("Getting global favorites");
       this.getSatListByFavorites();
     }
-    else if(this.page = "userFavorites")
+    else if(this.page = "favorites")
     {
       if(id)
       {
@@ -46,6 +46,8 @@ export class SatListComponent implements OnInit {
       }
         console.log("Error getting user favorites");
     }
+    console.log("None");
+    console.log(this.page);
   }
 
   getSatListByFavorites(){

@@ -25,7 +25,7 @@ export class UserFavoritesComponent implements OnInit {
   // comments!:any;
   message='';
   term="";
-  page="userFavorites";
+  @Output() page="userFavorites";
 
   constructor(private loginService:LoginService, private panelService: SidePanelService, private commentService:CommentService) { }
 

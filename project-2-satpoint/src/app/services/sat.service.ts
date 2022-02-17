@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Sat } from '../models/sat';
+import { Router } from '@angular/router'
 
 @Injectable({
   providedIn: 'root',
@@ -24,7 +25,7 @@ export class SatService {
   private getSatUrl: string =
     'https://api.n2yo.com/rest/v1/satellite/positions';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router ) {}
 
   getSatLocData(noradId: string): Observable<any> {
     console.log(noradId);
@@ -33,7 +34,9 @@ export class SatService {
     );
     }
 
-
+  checkRoute() : string{
+    return this.router.url;
+  }
 
 
   getAllSat(): Observable<Sat[]> {
