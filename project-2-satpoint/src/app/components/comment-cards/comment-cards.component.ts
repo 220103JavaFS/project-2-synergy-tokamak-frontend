@@ -12,30 +12,33 @@ export class CommentCardsComponent implements OnInit {
   @Input() satNoradId="";
   @Input() username: string | undefined;
   @Input() onUserProfile = false;
-  @Input() showPanel = false;
+  @Input() refresh = false;
 
 
   constructor(private commentService:CommentService) { }
 
   ngOnInit(): void {
+    this.username = sessionStorage.getItem("username") || undefined;
+    if(this.satNoradId) this.commentService.getComments(this.satNoradId).subscribe(res =>{
+      this.comments = res;
+      console.log(res);
+    });
 }
+
 
   
   getComments(){
-    if(this.showPanel) {
     console.log("in comment cards");
     console.log(this.satNoradId);
-    
     if(this.satNoradId) this.commentService.getComments(this.satNoradId).subscribe(res =>{
-        if(res) {
-          return res;
-        } else {
-        return this.comments;
-    }}
-    );
+      console.log(res);
+      this.comments = res;
+    });
+  
+        
     // if(this.username) return this.commentService.getUserComments(this.username);
     // // this.comments = this.commentService.getComments(this.satid);
     return this.comments;
-  }
+  
 }
 }

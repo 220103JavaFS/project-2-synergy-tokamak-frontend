@@ -18,13 +18,13 @@ export class HomePageComponent implements OnInit {
   @Output() satname="";
   @Output() satid=0;
   @Output() satNoradId="";
-  @Input() showPanel !:boolean;
+  @Input() showPanel =false;
   tempSatid = "";
   right = SideNavDirection.Right;
-  // comments!:any;
   message='';
   term="";
   page="mainPage";
+  refresh = false;
 
   constructor(private loginService:LoginService, private panelService: SidePanelService, private commentService:CommentService) { }
 
@@ -63,6 +63,7 @@ export class HomePageComponent implements OnInit {
       console.log(sessionStorage.getItem("userId"))
     this.commentService.sendComment(sessionStorage.getItem("userId") || "", this.satNoradId, this.message, new Date(Date.now()).toLocaleString()).subscribe( out => {
       console.log(out);
+      this.refresh = true;
     })
     
     }

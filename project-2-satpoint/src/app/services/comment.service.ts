@@ -13,8 +13,8 @@ export class CommentService {
   constructor(private http:HttpClient) { }
 
 
-  getComments(noradId:string):Observable<any> {
-    let res = this.http.get(this.url+"noradId/"+noradId);
+  getComments(noradId:string):Observable<any[]> {
+    let res = this.http.get<any>(this.url+"noradId/"+noradId);
     console.log(res);
     return res;
   }
