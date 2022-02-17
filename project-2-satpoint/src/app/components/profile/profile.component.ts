@@ -19,6 +19,8 @@ export class ProfileComponent implements OnInit {
   firstName : String | undefined;
   lastName : String | undefined;
   email: String | undefined;
+  latitude: Number | undefined;
+  longitude: Number | undefined;
   
   username: string | undefined;
   showFav = false;
@@ -38,6 +40,8 @@ export class ProfileComponent implements OnInit {
         this.email = user.email;
         this.firstName = user.firstName;
         this.lastName = user.lastName;
+        this.latitude = user.latitude;
+        this.longitude = user.longitude;
         this.username = user.username || "";
         console.log(this.loginService.currentUser)
   })
@@ -64,7 +68,7 @@ export class ProfileComponent implements OnInit {
   }
 
   updateUser(): void{
-    let user:any = {"firstName":this.firstName, "lastName":this.lastName, "email":this.email, "aboutMe": this.aboutMe};
+    let user:any = {"firstName":this.firstName, "lastName":this.lastName, "email":this.email, "aboutMe": this.aboutMe, "latitude":this.latitude, "longitude":this.longitude};
     console.log(user);
     this.profileService.update(user);
   } 
