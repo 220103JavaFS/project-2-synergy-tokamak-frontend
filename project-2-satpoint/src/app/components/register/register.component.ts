@@ -16,6 +16,8 @@ export class RegisterComponent implements OnInit {
   lastName:string = "";
   email:string = "";
   AboutMe:string = "";
+  latitude:number = 0;
+  longitude:number = 0;
 
   @Output() displayEvent = new EventEmitter<MouseEvent>(); //triggers the parent
 
@@ -48,7 +50,7 @@ export class RegisterComponent implements OnInit {
       if(emailHtml.validity.patternMismatch) {
         alert("Please provide email in proper format")
       } else {
-      let user:Register = new Register(0, this.username, this.password, this.firstName, this.lastName, this.email, this.AboutMe);
+      let user:Register = new Register(0, this.username, this.password, this.firstName, this.lastName, this.email, this.AboutMe, this.latitude, this.longitude);
       console.log(user);
       this.userService.register(user).subscribe(
         // (response:Register)=>{
