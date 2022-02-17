@@ -8,18 +8,18 @@ import { Message } from '@angular/compiler/src/i18n/i18n_ast';
   providedIn: 'root'
 })
 export class CommentService {
-  private url:string="http://localhost:8080/comments";
+  private url:string="http://localhost:8080/comments/";
  
   constructor(private http:HttpClient) { }
 
 
-  getComments(noradId:string):Observable<any[]> {
-    let res = this.http.get<any>(this.url+"noradId/"+noradId);
+  getComments(noradId:string):Observable<any> {
+    let res = this.http.get(this.url+"noradId/"+noradId);
     console.log(res);
     return res;
   }
 
-  getUserComments(username:string):Observable<any[]> {
+  getUserComments(username:string):Observable<any> {
     let res = this.http.get<any>(this.url+"username/"+username);
     console.log(res);
     return res;
@@ -35,7 +35,7 @@ export class CommentService {
       date: date
     }; 
     console.log(body);
-    let respone = this.http.post<any>(this.url, body).pipe(
+    let respone = this.http.post<any>(this.url+"new/", body).pipe(
       catchError(this.handleError<any>('sendComment', undefined))
     );
     

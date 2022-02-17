@@ -95,9 +95,10 @@ export class LoginComponent implements OnInit {
           satpoint.classList.add("is-invalid")
           this.badLogin = true;
         }else {
+          console.log(out)
           this.badLogin = false;
-          sessionStorage.setItem("userId",out[0]);
-          sessionStorage.setItem("username", out[1]);
+          sessionStorage.setItem("userId",out.body[0]);
+          sessionStorage.setItem("username", out.body[1]);
           this.router.navigateByUrl("/homepage");
         }    
         
