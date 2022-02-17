@@ -39,18 +39,29 @@ export class RegisterComponent implements OnInit {
 
 
   
-  registerUser(): void{
+  registerUser(event:MouseEvent): void{
     if (this.username == "" || this.password == "" || this.firstName == "" || this.lastName == "" || this.email == "" || this.AboutMe == "" ){
       alert ("Please fill out all of the fields");
     }
     else {
+      let emailHtml = <HTMLInputElement> document.getElementById("email");
+      if(emailHtml.validity.patternMismatch) {
+        alert("Please provide email in proper format")
+      } else {
       let user:Register = new Register(0, this.username, this.password, this.firstName, this.lastName, this.email, this.AboutMe);
       console.log(user);
       this.userService.register(user).subscribe(
-        (response:Register)=>{
+        // (response:Register)=>{
+        (response)=>{
+          if(response.status == 201) {
+            this.display(event);
+          }
+          else {
+            alert("Failed to register");
+          }
           
         }
-      )
+      )}
     }
   }
 
