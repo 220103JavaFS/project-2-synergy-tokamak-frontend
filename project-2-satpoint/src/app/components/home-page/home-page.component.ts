@@ -30,7 +30,7 @@ export class HomePageComponent implements OnInit {
   constructor(private loginService:LoginService, private panelService: SidePanelService, private commentService:CommentService) { }
 
   ngOnInit(): void {
-    //this.page = "mainPage";
+    this.page = "mainPage";
   }
 
   showPanelMethod(info:any) {
