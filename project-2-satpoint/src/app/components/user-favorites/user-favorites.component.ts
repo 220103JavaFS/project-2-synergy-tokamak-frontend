@@ -25,7 +25,8 @@ export class UserFavoritesComponent implements OnInit {
   // comments!:any;
   message='';
   term="";
-  @Output() page="userFavorites";
+
+  @Input() comments!:any[]
 
   constructor(private loginService:LoginService, private panelService: SidePanelService, private commentService:CommentService) { }
 
@@ -48,19 +49,15 @@ export class UserFavoritesComponent implements OnInit {
     this.showPanel = false;
     
   }
-
-  // getComments(){
-  //   this.comments = this.commentService.getComments(this.satid);
-  //   return this.comments;
-  // }
-
   submit(){
+    console.log("in homepage submit()")
     if(this.message){
-    this.commentService.sendComment(
-     
-      new Comment(this.message, 
-      new User(1, "tester", "tester", "tester", "tester", ""), 
-      new Sat(this.satid, this.satNoradId, this.satname,"",0), new Date(Date.now()).toLocaleString()));
+      console.log(this.satNoradId)
+      console.log(sessionStorage.getItem("userId"))
+    this.commentService.sendComment(sessionStorage.getItem("userId") || "", this.satNoradId, this.message, new Date(Date.now()).toLocaleString()).subscribe( out => {
+      this.comments = out.reverse();
+    })
+    
     }
     this.clear();
   }
@@ -72,6 +69,11 @@ export class UserFavoritesComponent implements OnInit {
 
   clear(){
     this.message="";
+  }
+
+  filter(event:string){
+    console.log(event)
+    this.term = event;
   }
 
 }

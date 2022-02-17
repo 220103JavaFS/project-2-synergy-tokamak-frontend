@@ -8,12 +8,12 @@ import { catchError, Observable, of} from 'rxjs';
 })
 export class ProfileService {
 
-  private url:string ="http://localhost:8080/profile";
+  private url:string ="http://localhost:8080/edit";
 
   constructor(private http:HttpClient) { }
 
 
-  update(thisuser:Update):Observable<Update>{
-    return this.http.post(this.url, thisuser) as Observable<Update>;
+  update(thisuser:Update){
+    return this.http.post(this.url, thisuser).subscribe();
   }
 }

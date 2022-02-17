@@ -1,82 +1,57 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Comment } from '../models/comment';
+import { catchError, Observable, of} from 'rxjs';
+import { Message } from '@angular/compiler/src/i18n/i18n_ast';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class CommentService {
-  private comments:Comment[] = [
-    {
-      description:"My first satellite!",
-      user: {
-        userId:1,
-        username:"tester",
-        firstName:"bob",
-        lastName:"burgers",
-        email:"burgers@email.com",
-        aboutMe:""
-      },
-      sat: {
-        satId: 1,
-        noradId:"36516",
-        satName:"SES 1",
-        satPicture:"",
-        numFavorites:0
-      },
-      date:new Date(Date.now()).toLocaleString()
-    }, 
-    {
-      description:"Bob spamming messages!",
-      user: {
-        userId:1,
-        username:"bob's burgers",
-        firstName:"bob",
-        lastName:"burgers",
-        email:"burgers@email.com",
-        aboutMe:""
-      },
-      sat: {
-        satId: 1,
-        noradId:"36516",
-        satName:"SES 1",
-        satPicture:"",
-        numFavorites:0
-      },
-      date:new Date(Date.now()).toLocaleString()
-    }, 
-    {
-      description:"I have yet to see this satellite",
-      user: {
-        userId:1,
-        username:"bob's burgers",
-        firstName:"bob",
-        lastName:"burgers",
-        email:"burgers@email.com",
-        aboutMe:""
-      },
-      sat: {
-        satId: 1,
-        noradId:"25544",
-        satName:"SPACE STATION",
-        satPicture:"",
-        numFavorites:0
-      },
-      date:new Date(Date.now()).toLocaleString()
-    }, 
+  private url:string="http://localhost:8080/comments/";
+ 
+  constructor(private http:HttpClient) { }
 
-  ];
-  constructor() { }
 
-  getComments(noradId:string):any[] {
-    return this.comments.reverse().filter(comment => comment.sat.noradId == noradId);
+  getComments(noradId:string):Observable<any[]> {
+    let res = this.http.get<any>(this.url+"noradId/"+noradId);
+    console.log(res);
+    return res;
   }
 
-  getUserComments(username:String):any[]{
-    return this.comments.reverse().filter(comment => comment.user.username.toLowerCase() == username.toLowerCase())
+  getUserComments(username:string):Observable<any> {
+    let res = this.http.get<any>(this.url+"username/"+username);
+    console.log(res);
+    return res;
   }
 
-  sendComment(comment:Comment){
-      this.comments.push(comment);
+  sendComment(userId:string, noradId:string, message:string, date:string):Observable<any[]> {
+    console.log(userId)
+    console.log(noradId)
+    let body = {
+      userId:Number.parseInt(userId),
+      noradId:Number.parseInt(noradId),
+      message: message,
+      date: date
+    }; 
+    console.log(body);
+    let respone = this.http.post<any>(this.url+"new", body).pipe(
+      catchError(this.handleError<any>('sendComment', undefined))
+    );
+    
+    console.log(respone);
+    return respone;
+}
+
+deleteComment(commentId:string){
+  return this.http.delete(this.url+"delete/"+commentId);
+}
+
+private handleError<T>(operation = 'operation', result?: T) {
+  return (error: any): Observable<T> => {
+    return of(result as T);
   }
+}
+
 
 }

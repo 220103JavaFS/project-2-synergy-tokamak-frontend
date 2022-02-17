@@ -4,6 +4,7 @@ export class Sat {
     public noradId: string,
     public satName: string,
     public satPicture: string,
-    public numFavorites: number
+    public numFavorites: number,
+    public favorite: boolean
   ) {}
 }

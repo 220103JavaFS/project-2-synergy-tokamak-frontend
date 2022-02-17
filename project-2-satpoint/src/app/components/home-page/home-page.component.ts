@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { LoginService } from 'src/app/services/login.service';
 import { SidePanelService } from 'src/app/services/side-panel.service';
 import { SideNavDirection } from '../side-nav-direction';
@@ -18,29 +18,33 @@ export class HomePageComponent implements OnInit {
   @Output() satname="";
   @Output() satid=0;
   @Output() satNoradId="";
-  @Input() showPanel !:boolean;
+  @Input() showPanel =false;
   tempSatid = "";
   right = SideNavDirection.Right;
-  // comments!:any;
   message='';
   term="";
-  @Output() page="mainPage";
+  page="";
+  refresh = false;
+  comments!:any[]
 
   constructor(private loginService:LoginService, private panelService: SidePanelService, private commentService:CommentService) { }
 
   ngOnInit(): void {
+    this.page = "mainPage";
   }
 
   showPanelMethod(info:any) {
+    console.log("in homepage")
+    console.log(info)
 
     this.satname = info.name;
     this.satid = info.id;
-    this.satNoradId = info.noradId;
+    this.satNoradId = info.satNoradId;
     this.showPanel = info.showPanel;
     if(this.tempSatid != this.satNoradId) {
       this.clear();
     }
-    this.satNoradId = this.satNoradId;
+    this.tempSatid = this.satNoradId;
     
   }
   closeEvent(event:boolean){
@@ -48,18 +52,22 @@ export class HomePageComponent implements OnInit {
     
   }
 
-  // getComments(){
-  //   this.comments = this.commentService.getComments(this.satid);
-  //   return this.comments;
-  // }
+  filter(event:string){
+    console.log(event)
+    this.term = event;
+  }
 
+  
   submit(){
+    console.log("in homepage submit()")
     if(this.message){
-    this.commentService.sendComment(
-     
-      new Comment(this.message, 
-      new User(1, "tester", "tester", "tester", "tester", ""), 
-      new Sat(this.satid, this.satNoradId, this.satname,"",0), new Date(Date.now()).toLocaleString()));
+      console.log(this.satNoradId)
+      console.log(sessionStorage.getItem("userId"))
+    this.commentService.sendComment(sessionStorage.getItem("userId") || "", this.satNoradId, this.message, new Date(Date.now()).toLocaleString()).subscribe( out => {
+      this.comments = out.reverse();
+      
+    })
+    
     }
     this.clear();
   }
@@ -71,6 +79,16 @@ export class HomePageComponent implements OnInit {
 
   clear(){
     this.message="";
+  }
+
+  delete(event:boolean){
+    this.commentService.getComments(this.satNoradId).subscribe( out => {
+      
+      
+      if(out) this.comments = out.reverse();
+      else this.comments = [];      
+      
+    })
   }
 
 }

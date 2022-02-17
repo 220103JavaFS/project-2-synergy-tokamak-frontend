@@ -1,6 +1,4 @@
 import { Component, Output, OnInit, Input, EventEmitter } from '@angular/core';
-import { Observable } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
 import { Sat } from 'src/app/models/sat';
 import { SatService } from 'src/app/services/sat.service';
 import { SidePanelService } from 'src/app/services/side-panel.service';
@@ -12,17 +10,42 @@ import { SidePanelService } from 'src/app/services/side-panel.service';
 })
 export class SatListComponent implements OnInit {
   @Output() showPanelMethodEvent = new EventEmitter<string>();
-  @Input() term = ""
-  @Input() page = ""
+  @Input() page = '';
+  @Input() term = '';
 
-  baseURL: string = "http://localhost:8080/";
+  baseURL: string = 'http://localhost:8080/';
 
   public globalSatList: Sat[] = [];
   public userSatList: Sat[] = [];
-  public satList: Sat[] = [];
+  //filler data for testing will get overwritten
+  public satList: Sat[] = [
+    {
+      satName: 'INTERNATIONAL SPACE STATION',
+      satId: 3,
+      noradId: '25544',
+      satPicture: 'https://www.nasa.gov/sites/default/files/s132e012209_sm.jpg',
+      numFavorites: 10,
+      favorite: true,
+    },
+    {
+      satName: 'SES 1',
+      satId: 1,
+      noradId: '36516',
+      satPicture: '',
+      numFavorites: 3,
+      favorite: true,
+    },
+    {
+      satName: 'NOAA 19',
+      satId: 4,
+      noradId: '33591',
+      satPicture: '',
+      numFavorites: 5,
+      favorite: false
+    },
+  ];
 
   responseStatus: number = 0;
-
 
   constructor(
     private satService: SatService,
@@ -36,62 +59,82 @@ export class SatListComponent implements OnInit {
       console.log("Getting global favorites");
       this.getSatListByFavorites();
     }
-    else if(this.page = "favorites")
+    else if(this.satService.checkRoute() === "favorites")
     {
-      if(id)
-      {
+      if (id) {
         this.getSatListByUserFavorites(parseInt(id));
         this.satList = this.userSatList;
-        console.log("Getting user favorites");
+        console.log('Getting user favorites');
+      } else {
+        console.log('Error getting user favorites');
       }
-        console.log("Error getting user favorites");
     }
     console.log("None");
     console.log(this.page);
   }
 
-  getSatListByFavorites(){
-    this.satService.getSatFavorites().subscribe(
-      (response: Sat[]) => {
-        this.globalSatList = response;
-        this.satList = this.globalSatList;
+
+  filterSatList() {
+    console.log(this.page);
+    if (this.term) {
+      if (this.page == 'mainPage') {
+        return this.globalSatList.filter((sat) => {
+          if (
+            sat.satName.toLowerCase().includes(this.term) ||
+            sat.noradId.toString().includes(this.term)
+          ) {
+            console.log(sat);
+            return sat;
+          }
+          return;
+        });
+      } else {
+        console.log('favories filter');
+        return this.userSatList.filter((sat) => {
+          if (
+            sat.satName.toLowerCase().includes(this.term) ||
+            sat.satId.toString().includes(this.term)
+          ) {
+            console.log(sat);
+            return sat;
+          }
+          return;
+        });
       }
-    )
+    }
+    if (this.page == 'mainPage') return this.globalSatList;
+    else return this.userSatList;
   }
 
-  getSatListByUserFavorites(id: number){
+  getSatListByFavorites() {
+    this.satService.getSatFavorites().subscribe((response: Sat[]) => {
+      this.globalSatList = response;
+      this.satList = this.globalSatList;
+    });
+  }
+
+  getSatListByUserFavorites(id: number) {
+    console.log(id);
+    console.log('in get sat list by user');
     this.satService.getSatFavoritesByUser(id).subscribe(
       (response: Sat[]) => {
         this.userSatList = response;
-        
-        //console.log(response);
+        console.log(response);
       },
-      err => {
-        console.log("Error caught at Subscriber :" + err);
+      (err) => {
+        console.log('Error caught at Subscriber :' + err);
       },
-      () => console.log("Processing Complete")
-    )
+      () => console.log('Processing Complete')
+    );
   }
 
-  public trackItem(index: number, item: Sat){
+  public trackItem(index: number, item: Sat) {
     return item.satId;
   }
 
-  // filterSatList(){
-  //   console.log("satlisting");
-  //   console.log(this.term)
-  //   if(this.term) {
-  //   return this.globalSatList.filter(sat => {
-  //     if(sat.satName.toLowerCase().includes(this.term) || sat.satId.toString().includes(this.term)){
-  //       return sat;
-  //     }
-  //   })
-  // }
-  //   return this.globalSatList;
-  // }
-
   togglePanelStateEvent(info: string) {
-    console.log('2');
+    console.log('in sat list event');
+    console.log(info);
 
     this.showPanelMethodEvent.emit(info);
   }
