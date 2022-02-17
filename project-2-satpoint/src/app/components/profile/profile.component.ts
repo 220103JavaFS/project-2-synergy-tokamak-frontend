@@ -64,12 +64,9 @@ export class ProfileComponent implements OnInit {
   }
 
   updateUser(): void{
-    let user:Update = new Update(this.firstName, this.lastName, this.email, this.aboutMe);
+    let user:any = {"firstName":this.firstName, "lastName":this.lastName, "email":this.email, "aboutMe": this.aboutMe};
     console.log(user);
-    this.profileService.update(user).subscribe(
-      (response:Update)=>{
-      }
-    )
+    this.profileService.update(user);
   } 
 
 
