@@ -59,28 +59,26 @@ export class LoginComponent implements OnInit {
     let satpoint = <HTMLHeadingElement>document.getElementById("satpoint");
     if(username.checkValidity() && password.checkValidity()) {
       this.login(username.value, password.value);
+      username.classList.remove("is-invalid");
+      password.classList.remove("is-invalid");
     } 
     else {
   
     if(!username.checkValidity()) {
       username.classList.add("is-invalid");
       this.badUsername = true;
-      console.log("bad username")
     }
     else{
       username.classList.remove("is-invalid");
       this.badUsername = false;
-      console.log("good username")
     }
   
     if(!password.checkValidity()){
       password.classList.add("is-invalid");
       this.badPassword = true;
-      console.log("bad pw");
     }else {
       password.classList.remove("is-invalid");
       this.badPassword = false;
-      console.log("good pw")
     }
     satpoint.classList.remove("is-invalid");
   }
@@ -89,21 +87,20 @@ export class LoginComponent implements OnInit {
 }
 
   private login(username:string, password:string){
+    let satpoint = <HTMLHeadingElement>document.getElementById("satpoint");
+
     this.loginService.login(username, password).subscribe(out => 
       {
-        console.log(out)
-        if(out){ 
-          console.log(out.headers);
-
-              if(out === undefined){
-                this.badLogin = true;
-              }else {
-                this.badLogin = false;
-                sessionStorage.setItem("userId",out[0]);
-                sessionStorage.setItem("username", out[1]);
-                this.router.navigateByUrl("/homepage");
-            }    
-        }
+        if(out == undefined){
+          satpoint.classList.add("is-invalid")
+          this.badLogin = true;
+        }else {
+          this.badLogin = false;
+          sessionStorage.setItem("userId",out[0]);
+          sessionStorage.setItem("username", out[1]);
+          this.router.navigateByUrl("/homepage");
+        }    
+        
         
     });
   
