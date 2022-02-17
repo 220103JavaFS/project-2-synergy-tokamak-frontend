@@ -1,9 +1,9 @@
 <div class="mt-2" *ngFor="let sat of filterSatList()">
   <app-sat-info (togglePanelStateEvent)="togglePanelStateEvent($event)"
     [satname]="sat.satName"
-    [satId]= sat.satId
+    [satId]= "sat.satId"
     [noradId]="sat.noradId"
-    [numFavorites]= sat.numFavorites
+    [numFavorites]= "sat.numFavorites"
     [satPicture]="sat.satPicture"
   ></app-sat-info>
 </div>

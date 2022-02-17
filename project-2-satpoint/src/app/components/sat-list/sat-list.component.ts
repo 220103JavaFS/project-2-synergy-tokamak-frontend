@@ -13,14 +13,36 @@ export class SatListComponent implements OnInit {
   @Input() page = ""
   @Input() term = ""
 
-  baseURL: string = "http://localhost:8080/";
+  baseURL: string = 'http://localhost:8080/';
 
   public globalSatList: Sat[] = [];
   public userSatList: Sat[] = [];
-  public satList: Sat[] = [];
+  //filler data for testing will get overwritten
+  public satList: Sat[] = [
+    {
+      satName: 'INTERNATIONAL SPACE STATION',
+      satId: 3,
+      noradId: '25544',
+      satPicture: 'https://www.nasa.gov/sites/default/files/s132e012209_sm.jpg',
+      numFavorites: 10,
+    },
+    {
+      satName: 'SES 1',
+      satId: 1,
+      noradId: '36516',
+      satPicture: '',
+      numFavorites: 3,
+    },
+    {
+      satName: 'NOAA 19',
+      satId: 4,
+      noradId: '33591',
+      satPicture: '',
+      numFavorites: 5,
+    },
+  ];
 
   responseStatus: number = 0;
-
 
   constructor(
     private satService: SatService,
@@ -41,7 +63,7 @@ export class SatListComponent implements OnInit {
       {
         this.getSatListByUserFavorites(parseInt(id));
         this.satList = this.userSatList;
-        console.log("Getting user favorites");
+        console.log('Getting user favorites');
       }
       else {
         console.log("Error getting user favorites");
@@ -95,14 +117,14 @@ export class SatListComponent implements OnInit {
         this.userSatList = response;        
         console.log(response);
       },
-      err => {
-        console.log("Error caught at Subscriber :" + err);
+      (err) => {
+        console.log('Error caught at Subscriber :' + err);
       },
-      () => console.log("Processing Complete")
-    )
+      () => console.log('Processing Complete')
+    );
   }
 
-  public trackItem(index: number, item: Sat){
+  public trackItem(index: number, item: Sat) {
     return item.satId;
   }
 

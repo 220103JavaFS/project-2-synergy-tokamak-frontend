@@ -35,7 +35,7 @@ export class CommentService {
       date: date
     }; 
     console.log(body);
-    let respone = this.http.post<any>(this.url+"new/", body).pipe(
+    let respone = this.http.post<any>(this.url+"new", body).pipe(
       catchError(this.handleError<any>('sendComment', undefined))
     );
     
