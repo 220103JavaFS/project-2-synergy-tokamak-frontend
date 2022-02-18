@@ -1,0 +1,11 @@
+<div class="main-container">
+    <app-nav-bar></app-nav-bar>
+  <div class="row">
+    <div class="form-group col-2 mt-1 align-items-start">
+      <app-filter (filterEvent)="filter($event)"></app-filter>
+    </div> 
+    <div class="col">
+      <app-sat-list [page]="page" [term]="term"></app-sat-list>
+    </div>
+  </div>
+  </div>

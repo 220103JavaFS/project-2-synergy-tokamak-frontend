@@ -30,7 +30,12 @@ export class SatInfoComponent implements OnInit {
   @Input() timestamp: string = '';
   @Input() isFavorite: boolean = false;
 
+  @Input() page = '';
+  @Input() index = 0;
+  disabled = false;
+
   @Output() togglePanelStateEvent = new EventEmitter<any>();
+  @Output() addSatelliteEvent = new EventEmitter<number>();
 
   constructor(
     private panelService: SidePanelService,
@@ -88,4 +93,11 @@ export class SatInfoComponent implements OnInit {
       satNoradId: this.noradId
     });
   }
+
+  addSat(event:MouseEvent){
+    let btn = <HTMLButtonElement>event.target;
+    this.disabled = true;
+    this.addSatelliteEvent.emit(parseInt(btn.id));
+  }
+
 }

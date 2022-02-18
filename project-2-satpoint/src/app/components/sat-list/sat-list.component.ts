@@ -1,5 +1,6 @@
 import { Component, Output, OnInit, Input, EventEmitter } from '@angular/core';
 import { Sat } from 'src/app/models/sat';
+import { ExternalService } from 'src/app/services/external.service';
 import { SatService } from 'src/app/services/sat.service';
 import { SidePanelService } from 'src/app/services/side-panel.service';
 
@@ -15,6 +16,7 @@ export class SatListComponent implements OnInit {
 
   baseURL: string = 'http://localhost:8080/';
 
+  public external: any[] = [];
   public globalSatList: Sat[] = [];
   public userSatList: Sat[] = [];
   //filler data for testing will get overwritten
@@ -46,10 +48,12 @@ export class SatListComponent implements OnInit {
   ];
 
   responseStatus: number = 0;
+  showExternal = false;
 
   constructor(
     private satService: SatService,
-    private panelService: SidePanelService
+    private panelService: SidePanelService, 
+    private externalService:ExternalService
   ) {}
 
   ngOnInit(): void {
@@ -71,9 +75,38 @@ export class SatListComponent implements OnInit {
       } else {
         console.log('Error getting user favorites');
       }
+    }else if(this.satService.checkRoute() === "/add") {
+      this.showExternal = true
+      this.getExternalSatellites();
     }
     console.log("None");
     console.log(this.page);
+  }
+
+  getExternalSatellites(){
+      this.externalService.aboveMe().subscribe(res => {
+        if(res) {
+          res.above.filter((s: { satid: number; }) => {
+            this.satService.checkSatellite(s.satid).subscribe(res => {
+              console.log("checking")
+              console.log(res)
+              if(res.status != 200) {
+                console.log(s);
+                this.external.push(s);
+              }
+            })
+          })
+        }
+      })
+  }
+
+  addSatellite(event:number){
+    console.log(this.external[event]);
+    this.satService.addSatellite(this.external[event].satid, this.external[event].satname).subscribe(
+      res => {
+        console.log(res);
+      }
+    )
   }
 
 
@@ -90,7 +123,7 @@ export class SatListComponent implements OnInit {
           }
           return;
         });
-      } else {
+      } else if(this.satService.checkRoute() === '/profile'){
         console.log('favories filter');
         return this.userSatList.filter((sat) => {
           if (
@@ -102,6 +135,16 @@ export class SatListComponent implements OnInit {
           }
           return;
         });
+      } else if(this.satService.checkRoute() === '/add') {
+        return this.external.filter(sat=> {
+          if (
+            sat.satname.toLowerCase().includes(this.term) ||
+            sat.satid.toString().includes(this.term)
+          ) {
+            return sat;
+          }
+          return;
+        })
       }
     
     if (this.page == 'mainPage') return this.globalSatList;

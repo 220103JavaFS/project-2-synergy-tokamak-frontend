@@ -16,9 +16,7 @@ import {
             }),
             animate(2000, style({
                 opacity: 1,
-                transform: "translateY(10px)"
             })), //will animate back to its normal state or style can be included to animate to a style
-            animate(2000)
         ]),
 
         transition(":leave", [ //target dom elements entering

@@ -4,12 +4,13 @@
     <!-- <div *ngIf="onUserProfile" class="text-end">
         {{comment.sat.name}} {{comment.sat.id}}
     </div>  -->
-    <div *ngIf="!onUserProfile">
-        <p class="fs-5 fw-bold">{{comment.user.username}}</p>
-    </div> 
+    
       <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3" *ngIf="comment.user.id == userId">
         <button id={{comment.commentId}} (click)="delete($event)" type="button" class="btn-close me-md-2 btn-outline-danger" aria-label="Delete"></button>
       </div>
+      <div *ngIf="!onUserProfile">
+        <p class="fs-5 fw-bold">{{comment.user.username}}</p>
+    </div> 
       
 
       <p>{{comment.comment}}</p>

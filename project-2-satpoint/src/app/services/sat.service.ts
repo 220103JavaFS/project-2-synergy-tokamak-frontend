@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, catchError, of } from 'rxjs';
 import { Sat } from '../models/sat';
 import { Router } from '@angular/router'
 
@@ -55,5 +55,33 @@ export class SatService {
     return this.http.get<Sat[]>(
       'http://localhost:8080/satellites/favorites'
       )
+  }
+
+  addSatellite(noradId:number, satname:string):Observable<any>{
+    let body = {
+      noradId:noradId,
+      satName:satname,
+      satPicture: "",
+      numFavorites:0
+    }
+    return this.http.post<any>(`${this.baseURL}satellites`, body, {
+      observe: 'response'
+    }).pipe(
+      catchError(this.handleError<any>('addSatellite', new HttpResponse({status:400})))
+    );
+  }
+
+  private handleError<T>(operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+      return of(result as T);
+    }
+  }
+
+  checkSatellite(noradId:number):Observable<any>{
+    return this.http.get<any>(`${this.baseURL}satellites/check/?noradId=${noradId}`, {
+      observe:'response'
+    }).pipe(
+      catchError(this.handleError<any>('addSatellite', new HttpResponse({status:404})))
+    );
   }
 }

@@ -19,6 +19,8 @@ import { CommentCardsComponent } from './components/comment-cards/comment-cards.
 import { FilterComponent } from './components/filter/filter.component';
 import { UserFavoritesComponent } from './components/user-favorites/user-favorites.component'
 import { MyInterceptor } from './services/http-interceptor.service';
+import { ExternalPanelComponent } from './components/external-panel/external-panel.component';
+import { ExternalngTemplateComponent } from './components/externalng-template/externalng-template.component';
 
 
 @NgModule({
@@ -36,6 +38,8 @@ import { MyInterceptor } from './services/http-interceptor.service';
     CommentCardsComponent,
     FilterComponent,
     UserFavoritesComponent,
+    ExternalPanelComponent,
+    ExternalngTemplateComponent,
   ],
   imports: [
     BrowserModule,

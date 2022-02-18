@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ExternalPanelComponent } from './components/external-panel/external-panel.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { LoginComponent } from './components/login/login.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
@@ -16,6 +17,7 @@ const routes: Routes = [
   {path:"sat-list", component:SatListComponent, data:['sat-list']},
   {path:"homepage", component:HomePageComponent, data:['homepage']},
   {path:"favorites", component:UserFavoritesComponent, data:['favorites']},
+  {path:"add", component:ExternalPanelComponent},
   {path: '**', component:PageNotFoundComponent}
 ];
  
