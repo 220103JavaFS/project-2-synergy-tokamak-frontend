@@ -21,6 +21,7 @@ import { UserFavoritesComponent } from './components/user-favorites/user-favorit
 import { MyInterceptor } from './services/http-interceptor.service';
 import { ExternalPanelComponent } from './components/external-panel/external-panel.component';
 import { ExternalngTemplateComponent } from './components/externalng-template/externalng-template.component';
+import { AuthenticationService } from './services/authentication.service'
 
 
 @NgModule({
@@ -40,6 +41,7 @@ import { ExternalngTemplateComponent } from './components/externalng-template/ex
     UserFavoritesComponent,
     ExternalPanelComponent,
     ExternalngTemplateComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -50,6 +52,7 @@ import { ExternalngTemplateComponent } from './components/externalng-template/ex
 
   ],
   providers: [
+    AuthenticationService,
     {provide: HTTP_INTERCEPTORS, useClass: MyInterceptor, multi:true}
   ],
   bootstrap: [AppComponent]

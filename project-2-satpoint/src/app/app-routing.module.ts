@@ -8,16 +8,17 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { SatInfoComponent } from './components/sat-info/sat-info.component';
 import { SatListComponent } from './components/sat-list/sat-list.component';
 import { UserFavoritesComponent } from './components/user-favorites/user-favorites.component';
+import { AuthenticationService } from './services/authentication.service';
 
 const routes: Routes = [
   {path:"", component:LoginComponent, data:['login']},
   {path:"login",component:LoginComponent, data:['login']},
-  {path:"profile", component:ProfileComponent, data:['profile']},
-  {path:"sat-info", component:SatInfoComponent, data:['sat-info']},
-  {path:"sat-list", component:SatListComponent, data:['sat-list']},
-  {path:"homepage", component:HomePageComponent, data:['homepage']},
-  {path:"favorites", component:UserFavoritesComponent, data:['favorites']},
-  {path:"add", component:ExternalPanelComponent},
+  {path:"profile", component:ProfileComponent, canActivate: [AuthenticationService], data:['profile']},
+  {path:"sat-info", component:SatInfoComponent, canActivate: [AuthenticationService], data:['sat-info']},
+  {path:"sat-list", component:SatListComponent, canActivate: [AuthenticationService], data:['sat-list']},
+  {path:"homepage", component:HomePageComponent, canActivate: [AuthenticationService], data:['homepage']},
+  {path:"favorites", component:UserFavoritesComponent, canActivate: [AuthenticationService], data:['favorites']},
+  {path:"add", component:ExternalPanelComponent, canActivate: [AuthenticationService],},
   {path: '**', component:PageNotFoundComponent}
 ];
  
