@@ -18,6 +18,7 @@ export class HomePageComponent implements OnInit {
   @Output() satname="";
   @Output() satid=0;
   @Output() satNoradId="";
+  
   @Input() showPanel =false;
   tempSatid = "";
   right = SideNavDirection.Right;
@@ -25,6 +26,7 @@ export class HomePageComponent implements OnInit {
   term="";
   refresh = false;
   comments!:any[]
+  page="mainPage";
 
   constructor(private loginService:LoginService, private panelService: SidePanelService, private commentService:CommentService) { }
 

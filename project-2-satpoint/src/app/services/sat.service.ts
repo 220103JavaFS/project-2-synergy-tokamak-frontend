@@ -35,6 +35,7 @@ export class SatService {
     }
 
   checkRoute() : string{
+    console.log(this.router.url);
     return this.router.url;
   }
 
@@ -50,11 +51,9 @@ export class SatService {
   }
 
   getSatFavorites(): Observable<Sat[]> {
+    console.log("Reaching backend");
     return this.http.get<Sat[]>(
-      'http://localhost:8080/satellites/favorites', 
-      // {
-      //   withCredentials:true
-      // }
+      'http://localhost:8080/satellites/favorites'
       )
   }
 }

@@ -53,14 +53,17 @@ export class SatListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    let id = localStorage.getItem('id');
-    if(this.satService.checkRoute() === 'homepage')
+    // let id id = parseInt(localStorage.getItem('userId'));
+    // id = parseInt(id);
+    // console.log(id);
+    if(this.satService.checkRoute() === '/homepage')
     {
       console.log("Getting global favorites");
       this.getSatListByFavorites();
     }
-    else if(this.satService.checkRoute() === "favorites")
+    else if(this.satService.checkRoute() === "/profile")
     {
+      let id = sessionStorage.getItem("userId");
       if (id) {
         this.getSatListByUserFavorites(parseInt(id));
         this.satList = this.userSatList;
@@ -76,8 +79,7 @@ export class SatListComponent implements OnInit {
 
   filterSatList() {
     console.log(this.page);
-    if (this.term) {
-      if (this.page == 'mainPage') {
+      if (this.satService.checkRoute() === '/homepage') {
         return this.globalSatList.filter((sat) => {
           if (
             sat.satName.toLowerCase().includes(this.term) ||
@@ -101,7 +103,7 @@ export class SatListComponent implements OnInit {
           return;
         });
       }
-    }
+    
     if (this.page == 'mainPage') return this.globalSatList;
     else return this.userSatList;
   }
@@ -110,6 +112,8 @@ export class SatListComponent implements OnInit {
     this.satService.getSatFavorites().subscribe((response: Sat[]) => {
       this.globalSatList = response;
       this.satList = this.globalSatList;
+      console.log("Sat list");
+      console.log(this.satList);
     });
   }
 
