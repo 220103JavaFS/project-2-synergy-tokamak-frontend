@@ -34,6 +34,8 @@ export class SatInfoComponent implements OnInit {
   @Input() index = 0;
   disabled = false;
 
+  @Input() showButton = true;
+
   @Output() togglePanelStateEvent = new EventEmitter<any>();
   @Output() addSatelliteEvent = new EventEmitter<number>();
 
@@ -50,6 +52,10 @@ export class SatInfoComponent implements OnInit {
   getTimestampMillis(): number {
     return Number(this.timestamp) * 1000;
     
+  }
+
+  isProfilePage():boolean {
+   return this.satService.checkRoute() == '/profile';
   }
 
   refreshData(): void {

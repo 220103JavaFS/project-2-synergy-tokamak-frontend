@@ -48,7 +48,7 @@
           <button class="btn btn-primary" (click)="refreshData()">
             Refresh
           </button>
-          <button class="btn btn-primary mx-4" (click)="toggleSidePanelEvent()">
+          <button *ngIf="!isProfilePage()" class="btn btn-primary mx-4" (click)="toggleSidePanelEvent()">
             Comments
           </button>
         </div>
