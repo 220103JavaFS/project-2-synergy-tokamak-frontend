@@ -24,28 +24,31 @@ export class CommentCardsComponent implements OnInit {
   ngOnInit(): void {
     this.username = sessionStorage.getItem("username") || undefined;
     this.userId = sessionStorage.getItem("userId") || undefined;
-    if(this.satNoradId) this.commentService.getComments(this.satNoradId).subscribe(res =>{
-      if(res) this.comments = res.reverse();
-      console.log(res);
-    });
+    // console.log(this.satNoradId)
+    // console.log("in comment cards")
+    // if(this.satNoradId) this.commentService.getComments(this.satNoradId).subscribe(res =>{
+    //   console.log(res)
+    //   if(res) this.comments = res.reverse();
+    //   else this.comments=[];
+    // });
 }
 
 
   
-  getComments(){
-    console.log("in comment cards");
-    console.log(this.satNoradId);
-    if(this.satNoradId) this.commentService.getComments(this.satNoradId).subscribe(res =>{
-      console.log(res);
-      this.comments = res;
-    });
+  // getComments(){
+  //   console.log("in comment cards");
+  //   console.log(this.satNoradId);
+  //   if(this.satNoradId) this.commentService.getComments(this.satNoradId).subscribe(res =>{
+  //     console.log(res);
+  //     this.comments = res;
+  //   });
   
         
     // if(this.username) return this.commentService.getUserComments(this.username);
     // // this.comments = this.commentService.getComments(this.satid);
-    return this.comments;
+//     return this.comments;
   
-}
+// }
 
   delete(event:MouseEvent){
       //console.log((<HTMLButtonElement>event.target).id)

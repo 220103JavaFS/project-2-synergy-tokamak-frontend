@@ -34,17 +34,26 @@ export class HomePageComponent implements OnInit {
   }
 
   showPanelMethod(info:any) {
-    console.log("in homepage")
-    console.log(info)
-
-    this.satname = info.name;
-    this.satid = info.id;
-    this.satNoradId = info.satNoradId;
-    this.showPanel = info.showPanel;
-    if(this.tempSatid != this.satNoradId) {
-      this.clear();
-    }
-    this.tempSatid = this.satNoradId;
+    this.commentService.getComments(info.satNoradId).subscribe(res => {
+        if(res){
+          this.comments = res.reverse();
+        } else {
+          this.comments=[];
+        }
+          console.log("in homepage")
+          console.log(info)
+          this.satname = info.name;
+          this.satid = info.id;
+          this.satNoradId = info.satNoradId;
+          this.showPanel = info.showPanel;
+          if(this.tempSatid != this.satNoradId) {
+            this.clear();
+          }
+            this.tempSatid = this.satNoradId;
+          
+    })
+    
+    
     
   }
   closeEvent(event:boolean){
@@ -63,11 +72,13 @@ export class HomePageComponent implements OnInit {
     if(this.message){
       console.log(this.satNoradId)
       console.log(sessionStorage.getItem("userId"))
-    this.commentService.sendComment(sessionStorage.getItem("userId") || "", this.satNoradId, this.message, new Date(Date.now()).toLocaleString()).subscribe( out => {
-      this.comments = out.reverse();
-      
-    })
-    
+      let id = sessionStorage.getItem("userId");
+      if(id) {
+        this.commentService.sendComment(id, this.satNoradId, this.message, new Date(Date.now()).toLocaleString()).subscribe( 
+          out => {
+          this.comments = out.reverse();
+      }
+    )}
     }
     this.clear();
   }
@@ -83,8 +94,6 @@ export class HomePageComponent implements OnInit {
 
   delete(event:boolean){
     this.commentService.getComments(this.satNoradId).subscribe( out => {
-      
-      
       if(out) this.comments = out.reverse();
       else this.comments = [];      
       

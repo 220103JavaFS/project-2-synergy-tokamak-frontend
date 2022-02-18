@@ -118,7 +118,6 @@ export class SatListComponent implements OnInit {
             sat.satName.toLowerCase().includes(this.term) ||
             sat.noradId.toString().includes(this.term)
           ) {
-            console.log(sat);
             return sat;
           }
           return;
@@ -130,7 +129,6 @@ export class SatListComponent implements OnInit {
             sat.satName.toLowerCase().includes(this.term) ||
             sat.satId.toString().includes(this.term)
           ) {
-            console.log(sat);
             return sat;
           }
           return;

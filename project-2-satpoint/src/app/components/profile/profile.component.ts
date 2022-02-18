@@ -62,7 +62,7 @@ export class ProfileComponent implements OnInit {
     if(username) {
       this.commentService.getUserComments(username).subscribe(response => {
         console.log(response)
-       this.comments = response;
+       this.comments = response.reverse();
       });
     }
   }
@@ -77,8 +77,8 @@ export class ProfileComponent implements OnInit {
   delete(event:boolean){
     if(this.username) {
     this.commentService.getUserComments(this.username).subscribe( out => {
-      
-        this.comments = out;
+        if(out) this.comments = out.reverse();
+        else this.comments = out;
       
       
     })
