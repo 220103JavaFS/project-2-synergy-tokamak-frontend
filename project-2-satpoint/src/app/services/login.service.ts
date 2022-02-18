@@ -45,9 +45,7 @@ export class LoginService {
     console.log("Logging out service");
     sessionStorage.clear();
     localStorage.clear();
-    let respone = this.http.post<any>(this.url+"logout",{}).pipe(
-      catchError(this.handleError<any>('logout', undefined))
-    );
+    this.http.post(this.url+"logout",{}).subscribe();
 }
 
   private handleError<T>(operation = 'operation', result?: T) {
