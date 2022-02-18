@@ -50,11 +50,7 @@ export class HomePageComponent implements OnInit {
             this.clear();
           }
             this.tempSatid = this.satNoradId;
-          
-    })
-    
-    
-    
+    })  
   }
   closeEvent(event:boolean){
     this.showPanel = false;

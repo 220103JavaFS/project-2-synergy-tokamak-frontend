@@ -99,6 +99,8 @@ export class LoginComponent implements OnInit {
           this.badLogin = false;
           sessionStorage.setItem("userId",out.body[0]);
           sessionStorage.setItem("username", out.body[1]);
+          sessionStorage.setItem("latitude", out.body[2]);
+          sessionStorage.setItem("longitude", out.body[3]);
           this.router.navigateByUrl("/homepage");
         }    
         

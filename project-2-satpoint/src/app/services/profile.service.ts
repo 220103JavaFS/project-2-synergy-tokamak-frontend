@@ -14,6 +14,13 @@ export class ProfileService {
 
 
   update(thisuser:Update){
-    return this.http.post(this.url, thisuser).subscribe();
+    return this.http.post(this.url, thisuser).subscribe( res => {
+      if(res) {
+        let latitude = thisuser.latitude;
+        let longitude = thisuser.longitude;
+        if(latitude) sessionStorage.setItem("latitude", latitude.toString());
+        if(longitude) sessionStorage.setItem("longitude", longitude.toString());
+      }
+    });
   }
 }

@@ -29,6 +29,8 @@ export class SatService {
 
   getSatLocData(noradId: string): Observable<any> {
     console.log(noradId);
+    this.latitude = sessionStorage.getItem("latitude") || '0';
+    this.longitude = sessionStorage.getItem("longitude") || '0';
     return this.http.get(
       `/api/satellite/positions/${noradId}/${this.latitude}/${this.longitude}/0/1/&apiKey=${this.apiKey}`
     );
