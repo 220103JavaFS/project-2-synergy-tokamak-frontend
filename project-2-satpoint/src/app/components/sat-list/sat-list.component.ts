@@ -77,7 +77,7 @@ export class SatListComponent implements OnInit {
       }
     }else if(this.satService.checkRoute() === "/add") {
       this.showExternal = true
-      this.getExternalSatellites();
+      //this.getExternalSatellites();
     }
     console.log("None");
     console.log(this.page);

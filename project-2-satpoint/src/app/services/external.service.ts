@@ -17,8 +17,6 @@ export class ExternalService {
     let longitude = sessionStorage.getItem("longitude") || '0';
     if(latitude) observer_lat = parseFloat(latitude);
     if(longitude) observer_lng = parseFloat(longitude);
-    console.log(observer_lat)
-    console.log(observer_lng)
       return this.http.get<any>(`/api/satellite/above/${observer_lat}/${observer_lng}/${observer_alt}/${search_radius}/${category_id}/${this.api}`);
   }
 
