@@ -79,8 +79,6 @@ export class ProfileComponent implements OnInit {
     this.commentService.getUserComments(this.username).subscribe( out => {
         if(out) this.comments = out.reverse();
         else this.comments = out;
-      
-      
     })
   }
   }

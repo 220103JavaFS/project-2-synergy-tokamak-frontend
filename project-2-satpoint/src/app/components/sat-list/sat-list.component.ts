@@ -16,7 +16,7 @@ export class SatListComponent implements OnInit {
 
   baseURL: string = 'http://localhost:8080/';
 
-  public external: any[] = [];
+  @Input() external: any[] = [];
   public globalSatList: Sat[] = [];
   public userSatList: Sat[] = [];
   //filler data for testing will get overwritten
@@ -77,7 +77,7 @@ export class SatListComponent implements OnInit {
       }
     }else if(this.satService.checkRoute() === "/add") {
       this.showExternal = true
-      //this.getExternalSatellites();
+      this.getExternalSatellites();
     }
     console.log("None");
     console.log(this.page);
@@ -88,10 +88,7 @@ export class SatListComponent implements OnInit {
         if(res) {
           res.above.filter((s: { satid: number; }) => {
             this.satService.checkSatellite(s.satid).subscribe(res => {
-              console.log("checking")
-              console.log(res)
               if(res.status != 200) {
-                console.log(s);
                 this.external.push(s);
               }
             })
@@ -123,7 +120,6 @@ export class SatListComponent implements OnInit {
           return;
         });
       } else if(this.satService.checkRoute() === '/profile'){
-        console.log('favories filter');
         return this.userSatList.filter((sat) => {
           if (
             sat.satName.toLowerCase().includes(this.term) ||
@@ -178,9 +174,6 @@ export class SatListComponent implements OnInit {
   }
 
   togglePanelStateEvent(info: string) {
-    console.log('in sat list event');
-    console.log(info);
-
     this.showPanelMethodEvent.emit(info);
   }
 }
