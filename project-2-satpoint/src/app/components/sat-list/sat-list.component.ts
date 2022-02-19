@@ -108,7 +108,6 @@ export class SatListComponent implements OnInit {
 
 
   filterSatList() {
-    console.log(this.page);
       if (this.satService.checkRoute() === '/homepage') {
         return this.globalSatList.filter((sat) => {
           if (

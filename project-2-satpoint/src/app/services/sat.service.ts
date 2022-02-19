@@ -83,7 +83,10 @@ export class SatService {
     return this.http.get<any>(`${this.baseURL}satellites/check/?noradId=${noradId}`, {
       observe:'response'
     }).pipe(
-      catchError(this.handleError<any>('addSatellite', new HttpResponse({status:404})))
+      catchError(this.handleError<any>('addSatellite', new HttpResponse({status:204})))
     );
+  }
+  getSatByName(satName:string):Observable<any>{
+    return this.http.get<any>(`${this.baseURL}satellites/satName?satName=${satName}`);
   }
 }
