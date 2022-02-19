@@ -16,7 +16,7 @@ export class FilterComponent implements OnInit {
 
   filter() {
     console.log(this.term)
-    this.filterEvent.emit(this.term.toLowerCase());
+    this.filterEvent.emit(this.term.toLowerCase().trim());
   }
 
 }
